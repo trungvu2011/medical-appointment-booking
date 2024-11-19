@@ -1,0 +1,56 @@
+.header {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 100px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 60px;
+        }
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .hotline {
+            font-size: 1.5rem;
+            color: #333;
+
+            strong {
+                color: red;
+            }
+        }
+
+        .auth-links {
+            a {
+                text-decoration: none;
+                color: #333;
+                font-size: 0.9rem;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+            }
+
+            .login {
+                font-weight: bold;
+                color: #075BB5;
+            }
+
+            span {
+                margin: 0 5px;
+                color: gray;
+            }
+        }
+    }
+}

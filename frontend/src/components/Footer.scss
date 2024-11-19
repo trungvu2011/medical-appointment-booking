@@ -1,0 +1,31 @@
+.footer {
+    background-color: #363946;
+    color: white;
+    padding: 0 150px;
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .footer-logo {
+            width: 200px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .footer-info {
+            p {
+                font-size: 1rem;
+                color: #9B9CA3;
+
+                strong {
+                    color: white;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
