@@ -17,9 +17,17 @@
         }
 
         .footer-info {
+            margin-bottom: 10px;
+
+            h4 {
+                font-size: 1rem;
+                margin: 20px 0 0 0;
+            }
+
             p {
                 font-size: 1rem;
                 color: #9B9CA3;
+                margin: 5px;
 
                 strong {
                     color: white;
