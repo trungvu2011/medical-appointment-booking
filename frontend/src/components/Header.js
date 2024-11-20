@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.scss';
+import ModalLogin from './ModalLogin';
+import ModalRegister from './ModalRegister';
+import { Button } from 'react-bootstrap';
 
 function Header() {
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+    const openLoginModal = () => setIsLoginModalOpen(true);
+    const closeLoginModal = () => setIsLoginModalOpen(false);
+
+    const openRegisterModal = () => setIsRegisterModalOpen(true);
+    const closeRegisterModal = () => setIsRegisterModalOpen(false);
+
     return (
         <header className="header">
             <div className="logo">
@@ -10,11 +22,14 @@ function Header() {
             <div className="header-right">
                 <span className="hotline">Hotline: <strong>1900 6422</strong></span>
                 <div className="auth-links">
-                    <a href="/register">Đăng ký mới</a>
+                    <a href="#" onClick={openRegisterModal}>Đăng ký mới</a>
                     <span>|</span>
-                    <a href="/login" className='login'>Đăng nhập</a>
+                    <a href="#" onClick={openLoginModal} className='login'>Đăng nhập</a>
                 </div>
             </div>
+
+            <ModalLogin isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+            <ModalRegister isOpen={isRegisterModalOpen} onClose={closeRegisterModal} />
         </header>
     );
 }
