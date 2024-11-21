@@ -3,17 +3,17 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Appointments', {
-      id: {
+      apointment_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
       patient_id: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       doctor_id: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       schedule_id: {
         type: Sequelize.STRING

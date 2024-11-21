@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Appointments.init({
-    patient_id: DataTypes.STRING,
-    doctor_id: DataTypes.STRING,
-    schedule_id: DataTypes.STRING,
+    patient_id: DataTypes.INTEGER,
+    doctor_id: DataTypes.INTEGER,
+    schedule_id: DataTypes.INTEGER,
     status: DataTypes.INTEGER,
     symptom: DataTypes.STRING
   }, {

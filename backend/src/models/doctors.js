@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { FOREIGNKEYS } = require('sequelize/lib/query-types');
 module.exports = (sequelize, DataTypes) => {
   class Doctors extends Model {
     /**
@@ -10,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Doctors.belongsTo(models.specialties, {
+        FOREIGNKEYS: 'specialty_id',
+        as: 'fk_specialty',
+      });
     }
   }
   Doctors.init({

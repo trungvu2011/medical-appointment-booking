@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Schedule_table.init({
-    doctor_id: DataTypes.STRING,
+    doctor_id: DataTypes.INTEGER,
     schedule_id: DataTypes.STRING
   }, {
     sequelize,
