@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Schedule_tables', {
-      id: {
+      schedule_table_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
