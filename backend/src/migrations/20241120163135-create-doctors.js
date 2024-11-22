@@ -21,12 +21,8 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      available: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-      },
       price_service: {
-        type: sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       createdAt: {
