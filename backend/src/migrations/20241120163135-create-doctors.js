@@ -1,5 +1,7 @@
 'use strict';
 
+const { sequelize } = require("../models");
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Doctors', {
@@ -22,6 +24,10 @@ module.exports = {
       available: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
+      },
+      price_service: {
+        type: sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
