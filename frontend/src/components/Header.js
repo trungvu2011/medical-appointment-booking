@@ -40,7 +40,9 @@ function Header() {
     return (
         <header className="header">
             <div className="logo">
-                <img src="https://benhviendaihocyhanoi.isofhcare.vn/image/hospital/dhyhanoi/logo.png" alt="Bệnh viện DH Y Hà Nội" />
+                <a href='/'>
+                    <img src="https://benhviendaihocyhanoi.isofhcare.vn/image/hospital/dhyhanoi/logo.png" alt="Bệnh viện DH Y Hà Nội" />
+                </a>
             </div>
             <div className="header-right">
                 <span className="hotline">Hotline:<strong>1900 6422</strong></span>
