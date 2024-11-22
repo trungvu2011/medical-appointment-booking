@@ -1,20 +1,10 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Appointments', {
+    await queryInterface.createTable('Doctor_Schedule', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-      },
-      patient_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       doctor_id: {
         type: Sequelize.INTEGER,
@@ -36,13 +26,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      status: {
-        type: Sequelize.ENUM('pending', 'cancelled', 'completed'),
-        defaultValue: 'pending',
-      },
-      symptom: {
-        type: Sequelize.TEXT,
-      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -55,6 +38,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Appointments');
+    await queryInterface.dropTable('Doctor_Schedule');
   },
 };
