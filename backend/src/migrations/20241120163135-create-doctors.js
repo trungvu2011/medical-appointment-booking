@@ -11,6 +11,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       specialty_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -20,6 +24,10 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+      },
+      level: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       price_service: {
         type: Sequelize.INTEGER,

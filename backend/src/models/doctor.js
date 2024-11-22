@@ -19,8 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Doctor.init({
+    name: DataTypes.STRING,
     specialty_id: DataTypes.INTEGER,
-    price_service: DataTypes.INTEGER
+    price_service: DataTypes.INTEGER,
+    level: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Doctor',

@@ -10,11 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       work_day: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       start_time: {
-        type: Sequelize.TIME,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       createdAt: {
