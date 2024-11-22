@@ -1,15 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
 function ModalLogin({ isOpen, onClose }) {
-    const [phone, setPhone] = useState('');
-    const [password, setPassword] = useState('');
+    let [phone, setPhone] = useState('');
+    let [password, setPassword] = useState('');
+    let [loading, setLoading] = useState(false);
+    let [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        if (!isOpen) {
+            setPhone('');
+            setPassword('');
+            setLoading(false);
+            setError('');
+        }
+    }, [isOpen]);
+
+    let handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Đăng nhập với phone:', phone);
+
+        setLoading(true);
+        setError(''); // Reset error when trying to submit
+
+        let requestData = {
+            phone: phone,
+            password: password
+        };
+
+        axios.post('http://localhost:8080/api/login', requestData)
+            .then(response => {
+                if (response.data.errCode === 0) {
+                    console.log('Đăng nhập thành công:', response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+                    setLoading(false);
+                    onClose();
+                    window.location.reload();
+                } else {
+                    console.error('Đăng nhập thất bại:', response.data);
+                    setLoading(false);
+                    setError('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.');
+                }
+
+            })
+            .catch(error => {
+                console.error('Lỗi khi đăng nhập:', error);
+                setLoading(false);
+                setError('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.');
+            });
     };
 
     return (
@@ -19,7 +59,7 @@ function ModalLogin({ isOpen, onClose }) {
             </Modal.Header>
             <Modal.Body className="px-5 py-4">
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="phone">
+                    <Form.Group controlId="phone" className="mb-3">
                         <Form.Label>Số điện thoại</Form.Label>
                         <Form.Control
                             type="text"
@@ -31,7 +71,7 @@ function ModalLogin({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="password">
+                    <Form.Group controlId="password" className="mb-3">
                         <Form.Label>Mật khẩu</Form.Label>
                         <Form.Control
                             type="password"
@@ -43,9 +83,29 @@ function ModalLogin({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" block className="btn-lg mt-2">
-                        Đăng nhập
-                    </Button>
+                    {error && (
+                        <div className="alert alert-danger mt-3" role="alert">
+                            {error}
+                        </div>
+                    )}
+
+                    <div className="d-flex justify-content-between mt-4">
+                        <Button
+                            variant="secondary"
+                            onClick={onClose}
+                            className="btn-lg"
+                        >
+                            Hủy
+                        </Button>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            className="btn-lg"
+                            disabled={loading}
+                        >
+                            {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+                        </Button>
+                    </div>
                 </Form>
             </Modal.Body>
         </Modal>

@@ -1,35 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
 function ModalRegister({ isOpen, onClose }) {
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    let [citizen_id, setCitizenId] = useState('');
+    let [name, setName] = useState('');
+    let [phone, setPhone] = useState('');
+    let [password, setPassword] = useState('');
+    let [loading, setLoading] = useState(false);
+    let [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (password !== confirmPassword) {
-            alert("Mật khẩu và xác nhận mật khẩu không khớp!");
-            return;
+    // Reset form when modal is closed
+    useEffect(() => {
+        if (!isOpen) {
+            setName('');
+            setPhone('');
+            setPassword('');
+            setCitizenId('');
+            setLoading(false);
+            setError('');
         }
-        console.log('Đăng ký với phone:', phone);
+    }, [isOpen]);
+
+    let handleSubmit = (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+        setError(''); // Reset any previous error
+
+        let requestData = {
+            name: name,
+            phone: phone,
+            password: password,
+            citizen_id: citizen_id
+        };
+
+        console.log('requestData:', requestData);
+
+        axios.post('http://localhost:8080/api/register', requestData)
+            .then(response => {
+                if (!response.data.errCode) {
+                    // Đăng ký thành công
+                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+                    onClose();
+                } else {
+                    console.error('Tài khoản đã tồn tại:', response.data);
+                    setLoading(false);
+                    setError('Đăng ký thất bại. Số điện thoại hoặc CCCD đã tồn tại trong hệ thống.');
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi đăng ký:', error);
+                setLoading(false);
+                setError('Đăng ký thất bại. Vui lòng kiểm tra lại thông tin.');
+            });
     };
 
     return (
         <Modal show={isOpen} onHide={onClose} centered size="lg">
             <Modal.Header closeButton className="bg-primary text-white">
-                <Modal.Title className="w-100 text-center">Đăng ký tài khoản</Modal.Title>
+                <Modal.Title className="w-100 text-center">Đăng ký ngay</Modal.Title>
             </Modal.Header>
             <Modal.Body className="px-5 py-4">
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="name">
-                        <Form.Label>Họ và tên</Form.Label>
+                    <Form.Group controlId="name" className="mb-3">
+                        <Form.Label>Họ và Tên</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Nhập họ và tên"
+                            placeholder="Nhập họ và tên của bạn"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
@@ -37,11 +78,11 @@ function ModalRegister({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="phone">
-                        <Form.Label>phone</Form.Label>
+                    <Form.Group controlId="phone" className="mb-3">
+                        <Form.Label>Số điện thoại</Form.Label>
                         <Form.Control
-                            type="phone"
-                            placeholder="Nhập số điện thoại"
+                            type="text"
+                            placeholder="Nhập số điện thoại của bạn"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             required
@@ -49,7 +90,7 @@ function ModalRegister({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="password">
+                    <Form.Group controlId="password" className="mb-3">
                         <Form.Label>Mật khẩu</Form.Label>
                         <Form.Control
                             type="password"
@@ -60,9 +101,42 @@ function ModalRegister({ isOpen, onClose }) {
                             className="form-control-lg"
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit" block className="btn-lg mt-3">
-                        Đăng ký
-                    </Button>
+
+                    <Form.Group controlId="citizen_id" className="mb-3">
+                        <Form.Label>Căn cước công dân</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Nhập căn cước công dân"
+                            value={citizen_id}
+                            onChange={(e) => setCitizenId(e.target.value)}
+                            required
+                            className="form-control-lg"
+                        />
+                    </Form.Group>
+
+                    {error && (
+                        <div className="alert alert-danger mt-3" role="alert">
+                            {error}
+                        </div>
+                    )}
+
+                    <div className="d-flex justify-content-between mt-4">
+                        <Button
+                            variant="secondary"
+                            onClick={onClose}
+                            className="btn-lg"
+                        >
+                            Hủy
+                        </Button>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            className="btn-lg"
+                            disabled={loading}
+                        >
+                            {loading ? 'Đang đăng ký...' : 'Đăng ký'}
+                        </Button>
+                    </div>
                 </Form>
             </Modal.Body>
         </Modal>
