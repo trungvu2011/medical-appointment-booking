@@ -87,11 +87,24 @@ let handleUserRegister = (data) => {
             let isPhoneExist = await checkUserPhone(data.phone);
             let isCitizenIdExist = await checkUserCitizenId(data.citizen_id);
             if (isPhoneExist || isCitizenIdExist) {
-                newUser.errCode = 2;
-                newUser.errMessage = 'User is already exist';
+                let existUser = await db.User.findOne({
+                    where: {
+                        phone: data.phone,
+                    }
+                });
+                if (!existUser.password) {
+                    existUser.name = data.name;
+                    existUser.citizen_id = data.citizen_id;
+                    existUser.password = bcrypt.hashSync(data.password, salt);
+                    existUser.phone = data.phone;
+                    await existUser.save();
+                    newUser = existUser;
+                } else {
+                    newUser.errCode = 2;
+                    newUser.errMessage = 'User is already exist';
+                }
             } else {
                 let hashPassword = await bcrypt.hash(data.password, salt);
-                console.log('Hashed password: ', hashPassword);
                 newUser = await db.User.create({
                     phone: data.phone,
                     password: hashPassword,
