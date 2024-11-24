@@ -1,6 +1,5 @@
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 
-console.log(process.env.DB_PASSWORD)
 module.exports = {
     development: {
         username: 'root',
