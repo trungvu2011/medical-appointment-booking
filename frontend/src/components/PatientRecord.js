@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './PatientRecord.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import ModalAddMember from './ModalAddMember';
 
 function PatientRecord() {
+    let [isModalOpen, setIsModalOpen] = useState(false);
+
+    let openModal = () => setIsModalOpen(true);
+    let closeModal = () => setIsModalOpen(false);
+
     return (
         <div className="registration-page">
             <div className="background-banner">
@@ -52,9 +58,11 @@ function PatientRecord() {
                         <FontAwesomeIcon className="patient-select" icon={faChevronRight} />
                     </div>
 
-                    <button className="add-member-button">+ Thêm thành viên mới</button>
+                    <button className="add-member-button" onClick={openModal}>+ Thêm thành viên mới</button>
                 </div>
             </div>
+
+            <ModalAddMember isOpen={isModalOpen} onClose={closeModal} />
         </div>
     );
 }
