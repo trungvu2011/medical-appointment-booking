@@ -20,10 +20,19 @@ function Header() {
     let [userName, setUserName] = useState('');
 
     useEffect(() => {
-        let storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setLogin(true);
-            setUserName(JSON.parse(storedUser).name);
+        try {
+            let storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                const parsedUser = JSON.parse(storedUser);
+                if (parsedUser?.name) {
+                    setLogin(true);
+                    setUserName(parsedUser.name);
+                } else {
+                    console.error('Dữ liệu người dùng không hợp lệ:', parsedUser);
+                }
+            }
+        } catch (error) {
+            console.error('Lỗi khi parse JSON từ localStorage:', error);
         }
     }, []);
 
