@@ -1,4 +1,5 @@
 import { raw } from 'body-parser';
+import { where } from 'sequelize';
 let db = require('../models/index');
 
 let handleAddNewMember = (data) => {
@@ -49,6 +50,36 @@ let handleAddNewMember = (data) => {
     });
 }
 
+let handleAllMembers = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let memberList = await db.User_Member.findAll({
+                where: { user_id: data.id }
+            });
+
+            let allMembers = [];
+
+            for (let i = 0; i < memberList.length; i++) {
+                let memberInfo = await db.User.findOne({
+                    where: { id: memberList[i].member_id },
+                    attributes: {
+                        include: ['id', 'name', 'phone', 'citizen_id'],
+                        exclude: ['password', 'createdAt', 'updatedAt']
+                    },
+
+                });
+                allMembers.push(memberInfo);
+            }
+
+            resolve(allMembers);
+
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 module.exports = {
-    handleAddNewMember: handleAddNewMember
+    handleAddNewMember: handleAddNewMember,
+    handleAllMembers: handleAllMembers
 }
