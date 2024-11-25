@@ -44,6 +44,25 @@ function ModalAddMember({ isOpen, onClose }) {
 
         console.log('Data to send:', requestData);
 
+        axios.post('http://localhost:8080/api/add-member', requestData)
+            .then(response => {
+                if (response.data.errCode === 0) {
+                    console.log('Thêm thành viên thành công:', response.data);
+                    setLoading(false);
+                    onClose();
+                    window.location.reload();
+                } else {
+                    console.error('Thêm thành viên thất bại:', response.data);
+                    setLoading(false);
+                    setError('Thêm thành viên thất bại. Vui lòng thử lại sau.');
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi thêm thành viên:', error);
+                setLoading(false);
+                setError('Lỗi khi thêm thành viên. Vui lòng thử lại sau.');
+            });
+
     };
 
     return (
@@ -109,7 +128,7 @@ function ModalAddMember({ isOpen, onClose }) {
                             className="btn-lg"
                             disabled={loading}
                         >
-                            Lưu lại
+                            {loading ? 'Đang thêm...' : 'Thêm'}
                         </Button>
                     </div>
                 </Form>

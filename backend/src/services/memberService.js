@@ -4,6 +4,7 @@ let db = require('../models/index');
 let handleAddNewMember = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            let memberData = {};
             let checkPhone = await db.User.findOne({
                 where: { phone: data.phone }
             });
@@ -16,13 +17,15 @@ let handleAddNewMember = (data) => {
                     }
                 });
                 if (checkMember) {
-                    return resolve({ message: 'This member already exists' });
+                    memberData.errCode = 1;
+                    memberData.errMessage = 'This member already exists';
                 } else {
                     await db.User_Member.create({
                         user_id: data.account_id,
                         member_id: checkPhone.id
                     });
-                    resolve({ message: 'Parent-child relationship added successfully' });
+                    memberData.errCode = 0;
+                    memberData.errMessage = 'Parent-child relationship added successfully';
                 }
 
             } else {
@@ -36,9 +39,10 @@ let handleAddNewMember = (data) => {
                     user_id: data.account_id,
                     member_id: newMember.id
                 });
-                resolve({ message: 'New member added successfully' });
+                memberData.errCode = 0;
+                memberData.errMessage = 'Add new member successfully';
             }
-
+            resolve(memberData);
         } catch (error) {
             reject(error);
         }
