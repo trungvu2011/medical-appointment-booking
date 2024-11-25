@@ -5,6 +5,7 @@ import initWebRoutes from './route/web';
 require('dotenv').config();
 import cors from 'cors';
 
+let db = require('./models');
 let app = express();
 
 const allowedOrigins = ['http://localhost:3000', 'http://192.168.1.209:3000'];
@@ -25,6 +26,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 viewEngine(app);
 initWebRoutes(app);
+
+db.sequelize.authenticate()
+    .then(() => {
+        console.log('Database connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
 
 let port = process.env.PORT || 6969;
 app.listen(port, () => {

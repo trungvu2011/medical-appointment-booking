@@ -28,7 +28,15 @@ function ModalAddMember({ isOpen, onClose }) {
         setLoading(true);
         setError('');
 
+        let user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            setError('Vui lòng đăng nhập để thêm thành viên');
+            setLoading(false);
+            return;
+        }
+
         let requestData = {
+            user_id: user.id,
             name: name,
             phone: phone,
             citizen_id: citizen_id

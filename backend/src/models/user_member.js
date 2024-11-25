@@ -3,23 +3,23 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Parent_Child extends Model {
+  class User_Member extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Parent_Child.belongsTo(models.User, { foreignKey: 'parent_id' });
-      Parent_Child.belongsTo(models.User, { foreignKey: 'child_id' });
+      User_Member.belongsTo(models.User, { foreignKey: 'user_id' });
+      User_Member.belongsTo(models.User, { foreignKey: 'member_id' });
     }
   }
-  Parent_Child.init({
-    parent_id: DataTypes.INTEGER,
-    child_id: DataTypes.INTEGER
+  User_Member.init({
+    user_id: DataTypes.INTEGER,
+    member_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Parent_Child',
+    modelName: 'User_Member',
   });
-  return Parent_Child;
+  return User_Member;
 };

@@ -2,21 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Parent_Child', {
+    await queryInterface.createTable('User_Members', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      parent_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
           key: 'id'
         }
       },
-      child_id: {
+      member_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
@@ -34,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Parent_Child');
+    await queryInterface.dropTable('User_Members');
   }
 };
