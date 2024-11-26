@@ -42,8 +42,6 @@ function ModalAddMember({ isOpen, onClose }) {
             citizen_id: citizen_id
         };
 
-        console.log('Data to send:', requestData);
-
         axios.post('http://localhost:8080/api/add-member', requestData)
             .then(response => {
                 if (response.data.errCode === 0) {
@@ -54,7 +52,13 @@ function ModalAddMember({ isOpen, onClose }) {
                 } else {
                     console.error('Thêm thành viên thất bại:', response.data);
                     setLoading(false);
-                    setError('Thêm thành viên thất bại. Vui lòng thử lại sau.');
+                    if (response.data.errCode === 1) {
+                        setError('Thành viên này đã tồn tại');
+                    } else if (response.data.errCode === 2) {
+                        setError('Thông tin số điện thoại và căn cước công dân không khớp');
+                    } else {
+                        setError('Lỗi khi thêm thành viên. Vui lòng thử lại sau.');
+                    }
                 }
             })
             .catch(error => {

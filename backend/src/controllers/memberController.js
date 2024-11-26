@@ -6,7 +6,6 @@ let handleAddMember = async (req, res) => {
 }
 
 let handleGetAllMembers = async (req, res) => {
-    console.log('req.body:', req.query);
     let data = await memberService.handleAllMembers(req.query);
     return res.status(200).json(data);
 }

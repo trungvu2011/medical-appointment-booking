@@ -9,24 +9,33 @@ let handleAddNewMember = (data) => {
             let checkPhone = await db.User.findOne({
                 where: { phone: data.phone }
             });
+            let checkCitizenId = await db.User.findOne({
+                where: { citizen_id: data.citizen_id }
+            });
 
-            if (checkPhone) {
-                let checkMember = await db.User_Member.findOne({
-                    where: {
-                        user_id: data.account_id,
-                        member_id: checkPhone.id
-                    }
-                });
-                if (checkMember) {
-                    memberData.errCode = 1;
-                    memberData.errMessage = 'This member already exists';
-                } else {
-                    await db.User_Member.create({
-                        user_id: data.account_id,
-                        member_id: checkPhone.id
+            if (checkPhone || checkCitizenId) {
+                if (checkPhone && checkCitizenId && checkPhone.id === checkCitizenId.id) {
+                    let checkMember = await db.User_Member.findOne({
+                        where: {
+                            user_id: data.user_id,
+                            member_id: checkPhone.id
+                        }
                     });
-                    memberData.errCode = 0;
-                    memberData.errMessage = 'Parent-child relationship added successfully';
+                    if (checkMember) {
+                        memberData.errCode = 1;
+                        memberData.errMessage = 'This member already exists';
+                    } else {
+                        console.log('data', data);
+                        await db.User_Member.create({
+                            user_id: data.user_id,
+                            member_id: checkPhone.id
+                        });
+                        memberData.errCode = 0;
+                        memberData.errMessage = 'Parent-child relationship added successfully';
+                    }
+                } else {
+                    memberData.errCode = 2;
+                    memberData.errMessage = 'Information of phone and citizen ID is not matched';
                 }
 
             } else {
@@ -37,7 +46,7 @@ let handleAddNewMember = (data) => {
                     citizen_id: data.citizen_id
                 });
                 await db.User_Member.create({
-                    user_id: data.account_id,
+                    user_id: data.user_id,
                     member_id: newMember.id
                 });
                 memberData.errCode = 0;
