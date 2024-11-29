@@ -50,7 +50,7 @@ function Header() {
         <header className="header">
             <div className="logo">
                 <a href='/'>
-                    <img src="https://benhviendaihocyhanoi.isofhcare.vn/image/hospital/dhyhanoi/logo.png" alt="Bệnh viện DH Y Hà Nội" />
+                    <img src={require('../assets/logo.png')} alt="Bệnh viện DH Y Hà Nội" />
                 </a>
             </div>
             <div className="header-right">

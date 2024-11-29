@@ -39,7 +39,7 @@ function ModalRegister({ isOpen, onClose }) {
 
         console.log('requestData:', requestData);
 
-        axios.post('http://localhost:8080/api/register', requestData)
+        axios.post('/api/register', requestData)
             .then(response => {
                 if (!response.data.errCode) {
                     // Đăng ký thành công

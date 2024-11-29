@@ -19,7 +19,7 @@ function PatientRecord() {
         if (userData) {
             userData = JSON.parse(userData);
 
-            axios.get('http://localhost:8080/api/get-all-members', {
+            axios.get('/api/get-all-members', {
                 params: {
                     id: userData.id,
                     phone: userData.phone,

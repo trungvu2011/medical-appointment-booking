@@ -6,7 +6,7 @@ function Footer() {
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-logo">
-                    <img src="https://benhviendaihocyhanoi.isofhcare.vn/image/hospital/dhyhanoi/logo-footer.png" alt="Bệnh viện DH Y Hà Nội" />
+                    <img src={require('../assets/logo-footer.png')} alt="Bệnh viện DH Y Hà Nội" />
                 </div>
                 <div className="footer-info">
                     <h4>BỆNH VIỆN ĐH Y HÀ NỘI</h4>

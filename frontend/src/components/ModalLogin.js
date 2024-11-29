@@ -30,7 +30,7 @@ function ModalLogin({ isOpen, onClose }) {
             password: password
         };
 
-        axios.post('http://localhost:8080/api/login', requestData)
+        axios.post('/api/login', requestData)
             .then(response => {
                 if (response.data.errCode === 0) {
                     console.log('Đăng nhập thành công:', response.data);

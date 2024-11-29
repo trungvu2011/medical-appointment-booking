@@ -35,7 +35,7 @@ function HeroSection() {
                 </div>
             </div>
             <div className="hero-image">
-                <img src="https://benhviendaihocyhanoi.isofhcare.vn/image/bg-dhy2.png" alt="Nhân viên y tế" />
+                <img src={require("../assets/bg-dhy2.png")} alt="Nhân viên y tế" />
             </div>
         </section>
     );

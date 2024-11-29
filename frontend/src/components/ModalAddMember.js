@@ -42,7 +42,7 @@ function ModalAddMember({ isOpen, onClose }) {
             citizen_id: citizen_id
         };
 
-        axios.post('http://localhost:8080/api/add-member', requestData)
+        axios.post('/api/add-member', requestData)
             .then(response => {
                 if (response.data.errCode === 0) {
                     console.log('Thêm thành viên thành công:', response.data);
