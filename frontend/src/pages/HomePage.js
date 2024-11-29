@@ -1,16 +1,14 @@
 import React from 'react';
 import Header from '../components/Header';
-import HeroSection from '../components/HeroSection';
 import Footer from '../components/Footer';
 
-function HomePage() {
+function BookingPage() {
     return (
         <div>
             <Header />
-            <HeroSection />
             <Footer />
         </div>
     );
 }
 
-export default HomePage;
+export default BookingPage;

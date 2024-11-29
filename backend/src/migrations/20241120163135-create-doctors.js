@@ -29,6 +29,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      img: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       price_service: {
         type: Sequelize.INTEGER,
         allowNull: false,

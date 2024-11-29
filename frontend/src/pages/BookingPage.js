@@ -1,16 +1,16 @@
 import React from 'react';
 import Header from '../components/Header';
+import HeroSection from '../components/HeroSection';
 import Footer from '../components/Footer';
-import PatientRecord from '../components/PatientRecord';
 
-function RecordPage() {
+function BookingPage() {
     return (
         <div>
             <Header />
-            <PatientRecord />
+            <HeroSection />
             <Footer />
         </div>
     );
 }
 
-export default RecordPage;
+export default BookingPage;

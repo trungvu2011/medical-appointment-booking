@@ -18,6 +18,7 @@
   "homepage": "https://github.com/trungvu2011/medical-appointment-booking#readme",
   "description": "",
   "dependencies": {
+    "axios": "^1.7.8",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",

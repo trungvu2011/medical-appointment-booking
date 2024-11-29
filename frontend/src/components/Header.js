@@ -36,10 +36,6 @@ function Header() {
         }
     }, []);
 
-    let handleLoginSuccess = (name) => {
-        setUserName(name);
-    }
-
     let handleLogout = () => {
         localStorage.removeItem('user');
         setLogin(false);
@@ -49,7 +45,7 @@ function Header() {
     return (
         <header className="header">
             <div className="logo">
-                <a href='/'>
+                <a href='/booking'>
                     <img src={require('../assets/logo.png')} alt="Bệnh viện DH Y Hà Nội" />
                 </a>
             </div>
