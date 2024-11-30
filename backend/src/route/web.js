@@ -2,6 +2,7 @@ import express from 'express';
 import homeController from '../controllers/homeController';
 import userController from '../controllers/userController';
 import memberController from '../controllers/memberController.js';
+import doctorController from '../controllers/doctorController.js';
 
 let router = express.Router();
 
@@ -17,6 +18,8 @@ let initWebRoutes = (app) => {
 
     router.post('/api/add-member', memberController.handleAddMember);
     router.get('/api/get-all-members', memberController.handleGetAllMembers);
+
+    router.get('/api/get-all-doctors', doctorController.handleGetAllDoctors);
 
     return app.use("/", router);
 }

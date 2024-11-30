@@ -45,10 +45,19 @@ function Header() {
     return (
         <header className="header">
             <div className="logo">
-                <a href='/booking'>
+                <a href='/home'>
                     <img src={require('../assets/logo.png')} alt="Bệnh viện DH Y Hà Nội" />
                 </a>
             </div>
+            <nav className="nav-menu">
+                <ul>
+                    <li><a href="/home">Trang chủ</a></li>
+                    <li><a href="">Giới thiệu</a></li>
+                    <li><a href="">Bác sĩ</a></li>
+                    <li><a href="/booking">Đặt lịch</a></li>
+                    <li><a href="">Tin tức</a></li>
+                </ul>
+            </nav>
             <div className="header-right">
                 <span className="hotline">Hotline:<strong>1900 6422</strong></span>
                 {isLogin ? (

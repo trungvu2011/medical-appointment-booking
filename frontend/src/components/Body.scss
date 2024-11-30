@@ -1,0 +1,115 @@
+.body-container {
+    text-align: center;
+
+    .item {
+        text-align: center;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .react-multi-carousel-dot button {
+        background: #ccc;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+    }
+
+    .react-multi-carousel-dot--active button {
+        background: #075BB5;
+    }
+
+    .doctor-container {
+        padding: 40px 0;
+        background: #f4f8fc;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        .doctor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+
+            .doctor-title {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+                color: #075BB5;
+                font-weight: bold;
+                text-align: left;
+                margin-left: 100px;
+            }
+
+            .doctor-view-more {
+                width: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .view-more-button {
+                background-color: #075BB5;
+                color: #fff;
+                font-size: 1.2rem;
+                padding: 12px 24px;
+                border: none;
+                border-radius: 30px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #064f8a;
+                }
+            }
+        }
+
+
+        .doctor-card {
+            background-color: #fff;
+            height: 300px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 0 10px;
+
+            &:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .doctor-image {
+                width: 140px;
+                height: 140px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 20px;
+            }
+
+            .doctor-name {
+                font-size: 1.4rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #333;
+                transition: color 0.3s;
+
+                &:hover {
+                    color: #075BB5;
+                }
+            }
+
+            .doctor-specialty {
+                font-size: 1rem;
+                color: #777;
+                font-style: italic;
+            }
+        }
+    }
+}

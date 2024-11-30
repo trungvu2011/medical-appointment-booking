@@ -6,6 +6,8 @@
     padding: 15px 100px;
     background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+
 
     .logo {
         display: flex;
@@ -13,6 +15,52 @@
 
         img {
             height: 60px;
+        }
+    }
+
+    .nav-menu {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        margin-left: 50px;
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+
+            li {
+                a {
+                    text-decoration: none;
+                    color: #333;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    position: relative;
+                    transition: color 0.3s ease;
+
+
+                    &:hover {
+                        color: #075BB5;
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: -5px;
+                        width: 0;
+                        height: 2px;
+                        background-color: #075BB5;
+                        transition: width 0.3s ease;
+                    }
+
+                    &:hover::after {
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
 
@@ -82,6 +130,7 @@
 
                 &:hover .logout-button {
                     display: inline-block;
+                    z-index: 1000;
                 }
 
             }
