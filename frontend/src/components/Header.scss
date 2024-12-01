@@ -1,9 +1,9 @@
 .header {
-    height: 60px;
+    height: 75px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 100px;
+    padding: 15px 90px;
     background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -12,9 +12,29 @@
     .logo {
         display: flex;
         align-items: center;
+        gap: 15px;
+        width: auto;
+        text-decoration: none;
 
-        img {
-            height: 60px;
+        a {
+            text-decoration: none;
+            color: #0d6efd;
+            display: flex;
+            align-items: center;
+
+            .hospital-icon {
+                font-size: 2.8rem;
+                color: #0d6efd;
+            }
+
+            .hospital-name {
+                margin: 10px 0 10px 10px;
+                font-size: 1.8rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                white-space: nowrap;
+            }
         }
     }
 
@@ -22,7 +42,8 @@
         flex: 1;
         display: flex;
         align-items: center;
-        margin-left: 50px;
+        margin-left: 20px;
+        text-transform: uppercase;
 
         ul {
             list-style: none;
@@ -35,14 +56,14 @@
                 a {
                     text-decoration: none;
                     color: #333;
-                    font-size: 1.2rem;
+                    font-size: 1rem;
                     font-weight: 500;
                     position: relative;
                     transition: color 0.3s ease;
 
 
                     &:hover {
-                        color: #075BB5;
+                        color: #0d6efd;
                     }
 
                     &::after {
@@ -52,7 +73,7 @@
                         bottom: -5px;
                         width: 0;
                         height: 2px;
-                        background-color: #075BB5;
+                        background-color: #0d6efd;
                         transition: width 0.3s ease;
                     }
 
@@ -89,8 +110,8 @@
 
             .user-icon {
                 font-size: 0.9rem;
-                color: #075BB5;
-                border: solid 1px #075BB5;
+                color: #0d6efd;
+                border: solid 1px #0d6efd;
                 padding: 5px;
                 border-radius: 50%;
                 align-items: center;
@@ -106,7 +127,7 @@
                 .user-name {
                     font-size: 1.2rem;
                     font-weight: bold;
-                    color: #075BB5;
+                    color: #0d6efd;
                     margin-left: 10px;
                 }
 
@@ -149,7 +170,7 @@
 
             .login {
                 font-weight: bold;
-                color: #075BB5;
+                color: #0d6efd;
             }
 
             span {

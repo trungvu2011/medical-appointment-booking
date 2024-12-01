@@ -5,6 +5,7 @@ import ModalRegister from './ModalRegister';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHospital } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
     let [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -46,7 +47,8 @@ function Header() {
         <header className="header">
             <div className="logo">
                 <a href='/home'>
-                    <img src={require('../assets/logo.png')} alt="Bệnh viện DH Y Hà Nội" />
+                    <FontAwesomeIcon className='hospital-icon' icon={faHospital} />
+                    <h2 className="hospital-name">E-Hospital</h2>
                 </a>
             </div>
             <nav className="nav-menu">

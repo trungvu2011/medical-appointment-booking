@@ -6,13 +6,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Body() {
-    let banner = {
-        desktop: {
-            breakpoint: { max: 4000, min: 0 },
-            items: 1
-        }
-    };
-
     let doctorSlider = {
         desktop: {
             breakpoint: { max: 4000, min: 1024 },
@@ -57,21 +50,28 @@ function Body() {
 
     return (
         <div className='body-container'>
-            <Carousel
-                responsive={banner}
-                infinite
-                autoPlay
-                autoPlaySpeed={3000}
-                showDots={true}
-                arrows={true}
-            >
-                <div className="item">
-                    <img src={require('../assets/banner1.jpg')} alt="Banner 1" />
+            <div className="health-banner">
+                <div className="content">
+                    <h1 className="title">Cuộc sống khỏe mạnh là hạnh phúc lớn nhất</h1>
+                    <div className="stats">
+                        <div className="stat-item">
+                            <h2>123</h2>
+                            <p>Expert Doctors</p>
+                        </div>
+                        <div className="stat-item">
+                            <h2>1234</h2>
+                            <p>Medical Staff</p>
+                        </div>
+                        <div className="stat-item">
+                            <h2>12345</h2>
+                            <p>Total Patients</p>
+                        </div>
+                    </div>
                 </div>
-                <div className="item">
-                    <img src={require('../assets/banner2.jpg')} alt="Banner 2" />
+                <div className="image-container">
+                    <img src={require('../assets/banner.jpg')} alt="Doctors" />
                 </div>
-            </Carousel>
+            </div>
 
             <div className='doctor-container'>
                 <div className='doctor-header'>
