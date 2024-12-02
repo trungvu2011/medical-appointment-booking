@@ -46,14 +46,14 @@ function Header() {
     return (
         <header className="header">
             <div className="logo">
-                <a href='/home'>
+                <a href='/'>
                     <FontAwesomeIcon className='hospital-icon' icon={faHospital} />
                     <h2 className="hospital-name">E-Hospital</h2>
                 </a>
             </div>
             <nav className="nav-menu">
                 <ul>
-                    <li><a href="/home">Trang chủ</a></li>
+                    <li><a href="/">Trang chủ</a></li>
                     <li><a href="/specialties">Chuyên khoa</a></li>
                     <li><a href="/doctors">Bác sĩ</a></li>
                     <li><a href="/booking">Đặt lịch</a></li>
@@ -61,7 +61,6 @@ function Header() {
                 </ul>
             </nav>
             <div className="header-right">
-                <span className="hotline">Hotline:<strong>1900 6422</strong></span>
                 {isLogin ? (
                     <div className="auth-links">
                         <div className="user-info">
@@ -75,7 +74,7 @@ function Header() {
                     </div>
                 ) : (
                     <div className="auth-links">
-                        <a href="#" onClick={openRegisterModal}>Đăng ký mới</a>
+                        <a href="#" onClick={openRegisterModal}>Đăng ký</a>
                         <span>|</span>
                         <a href="#" onClick={openLoginModal} className='login'>Đăng nhập</a>
                     </div>

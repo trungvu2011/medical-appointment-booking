@@ -34,8 +34,6 @@ function Body() {
 
     let renderDoctorCards = () => {
         let cards = [];
-        console.log('Doctors:', doctors);
-        console.log('Length: ', doctors.length);
         for (let i = 0; i < doctors.length; i++) {
             let doctor = doctors[i];
             if (doctor.level !== 'PGS' && doctor.level !== 'GSTS' && doctor.level !== 'ThsBS') continue;

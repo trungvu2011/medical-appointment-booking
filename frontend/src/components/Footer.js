@@ -8,7 +8,7 @@ function Footer() {
         <footer className="footer">
             <div className="footer-content">
                 <div className="logo">
-                    <a href='/home'>
+                    <a href='/'>
                         <FontAwesomeIcon className='hospital-icon' icon={faHospital} />
                         <h2 className="hospital-name">E-Hospital</h2>
                     </a>
