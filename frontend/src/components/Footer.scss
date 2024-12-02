@@ -8,11 +8,32 @@
         justify-content: space-between;
         align-items: center;
 
-        .footer-logo {
-            width: 200px;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: auto;
+            text-decoration: none;
 
-            img {
-                width: 100%;
+            a {
+                text-decoration: none;
+                color: white;
+                display: flex;
+                align-items: center;
+
+                .hospital-icon {
+                    font-size: 2.8rem;
+                    color: white;
+                }
+
+                .hospital-name {
+                    margin: 10px 0 10px 10px;
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    white-space: nowrap;
+                }
             }
         }
 

@@ -54,8 +54,8 @@ function Header() {
             <nav className="nav-menu">
                 <ul>
                     <li><a href="/home">Trang chủ</a></li>
-                    <li><a href="">Giới thiệu</a></li>
-                    <li><a href="">Bác sĩ</a></li>
+                    <li><a href="/specialties">Chuyên khoa</a></li>
+                    <li><a href="/doctors">Bác sĩ</a></li>
                     <li><a href="/booking">Đặt lịch</a></li>
                     <li><a href="">Tin tức</a></li>
                 </ul>

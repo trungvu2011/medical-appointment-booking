@@ -5,6 +5,12 @@ let handleGetAllDoctors = async (req, res) => {
     return res.status(200).json(data);
 }
 
+let handleGetAllSpecialties = async (req, res) => {
+    let data = await doctorService.handleAllSpecialties();
+    return res.status(200).json(data);
+}
+
 module.exports = {
-    handleGetAllDoctors: handleGetAllDoctors
+    handleGetAllDoctors: handleGetAllDoctors,
+    handleGetAllSpecialties: handleGetAllSpecialties
 };

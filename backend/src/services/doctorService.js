@@ -27,6 +27,28 @@ let handleAllDoctors = async (query) => {
     });
 }
 
+let handleAllSpecialties = async () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let specialties = await db.Specialty.findAll();
+            if (specialties && specialties.length > 0) {
+                resolve({
+                    errCode: 0,
+                    data: specialties
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'No specialties found'
+                });
+            }
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 module.exports = {
-    handleAllDoctors: handleAllDoctors
+    handleAllDoctors: handleAllDoctors,
+    handleAllSpecialties: handleAllSpecialties
 }

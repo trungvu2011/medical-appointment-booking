@@ -1,5 +1,6 @@
 .body-container {
     text-align: center;
+    margin-top: 80px;
 
     .health-banner {
         background: #0d6efd;
@@ -120,44 +121,70 @@
 
         .doctor-card {
             background-color: #fff;
-            height: 300px;
-            padding: 25px;
+            height: 320px;
+            padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 0 10px;
+            margin: 0 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
             &:hover {
-                transform: translateY(-10px);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                transform: translateY(-8px);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
             }
 
             .doctor-image {
-                width: 140px;
-                height: 140px;
+                width: 120px;
+                height: 120px;
                 border-radius: 50%;
                 object-fit: cover;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    border-color: #075BB5;
+                    transform: scale(1.1);
+                }
             }
 
             .doctor-name {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
                 font-weight: bold;
-                margin-bottom: 10px;
                 color: #333;
-                transition: color 0.3s;
+                margin: 5px 0 5px;
+                transition: color 0.3s ease;
 
                 &:hover {
-                    color: #075BB5;
+                    color: #0d6efd;
                 }
             }
 
             .doctor-specialty {
                 font-size: 1rem;
-                color: #777;
+                color: #555;
                 font-style: italic;
+                margin-bottom: 10px;
+            }
+
+            .detail-button {
+                background-color: #0d6efd;
+                color: #fff;
+                font-size: 1rem;
+                padding: 8px 16px;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #075BB5;
+                }
             }
         }
+
     }
 }

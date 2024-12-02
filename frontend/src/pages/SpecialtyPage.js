@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Doctor from '../components/Doctor.js';
+import Specialty from '../components/Specialty.js';
 
 function BookingPage() {
     return (
         <div>
             <Header />
-            <Doctor />
+            <Specialty />
             <Footer />
         </div>
     );

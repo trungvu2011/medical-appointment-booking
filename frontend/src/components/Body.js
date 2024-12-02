@@ -10,6 +10,14 @@ function Body() {
         desktop: {
             breakpoint: { max: 4000, min: 1024 },
             items: 4
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 600 },
+            items: 2
+        },
+        mobile: {
+            breakpoint: { max: 600, min: 0 },
+            items: 1
         }
     };
 
@@ -46,6 +54,37 @@ function Body() {
     let navigate = useNavigate();
     let viewMoreDoctor = () => {
         navigate('/doctors');
+    }
+
+    let [specialties, setSpecialties] = useState([]);
+    useEffect(() => {
+        axios.get('/api/get-all-specialties')
+            .then(response => {
+                setSpecialties(response.data.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the specialty data!', error);
+            });
+    }, []);
+
+    let renderspecialtyCards = () => {
+        let cards = [];
+        for (let i = 0; i < specialties.length; i++) {
+            let specialty = specialties[i];
+            console.log(specialty);
+            cards.push(
+                <div className="doctor-card" key={i}>
+                    <img className="doctor-image" src={specialty.img} alt={specialty.name} />
+                    <div className="doctor-name">{specialty.name}</div>
+                    <div className="doctor-specialty">{specialty.description}</div>
+                </div>
+            );
+        }
+        return cards;
+    }
+
+    let viewMorespecialty = () => {
+        navigate('/specialties');
     }
 
     return (
@@ -89,6 +128,25 @@ function Body() {
                     arrows={true}
                 >
                     {renderDoctorCards()}
+                </Carousel>
+            </div>
+
+            <div className='doctor-container'>
+                <div className='doctor-header'>
+                    <h2 className="doctor-title">Chuyên khoa</h2>
+                    <div className="doctor-view-more">
+                        <button className="view-more-button" onClick={viewMorespecialty}>Xem thêm</button>
+                    </div>
+                </div>
+                <Carousel
+                    responsive={doctorSlider}
+                    infinite
+                    autoPlay
+                    autoPlaySpeed={3000}
+                    showDots={false}
+                    arrows={true}
+                >
+                    {renderspecialtyCards()}
                 </Carousel>
             </div>
 
