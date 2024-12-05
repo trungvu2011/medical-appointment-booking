@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage';
 import BookingPage from './pages/BookingPage';
-import RecordPage from './pages/RecordPage';
+import SelectPatientPage from './pages/SelectPatientPage';
+import SelectDoctorPage from './pages/SelectDoctorPage.js';
 import DoctorPage from './pages/DoctorPage';
 import SpecialtyPage from './pages/SpecialtyPage';
 import axios from 'axios';
@@ -15,7 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/booking" element={<BookingPage />} />
-        <Route path="/record" element={<RecordPage />} />
+        <Route path="/select-patients" element={<SelectPatientPage />} />
+        <Route path="/select-doctors" element={<SelectDoctorPage />} />
         <Route path="/doctors" element={<DoctorPage />} />
         <Route path="/specialties" element={<SpecialtyPage />} />
       </Routes>

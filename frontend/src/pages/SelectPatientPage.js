@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import PatientRecord from '../components/PatientRecord';
+import SelectPatient from '../components/SelectPatient';
 
 function RecordPage() {
     return (
         <div>
             <Header />
-            <PatientRecord />
+            <SelectPatient />
             <Footer />
         </div>
     );

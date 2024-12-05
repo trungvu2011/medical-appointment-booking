@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import './PatientRecord.scss';
+import './SelectPatient.scss';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import ModalAddMember from './ModalAddMember';
 import axios from 'axios';
 
-function PatientRecord() {
+function SelectPatient() {
     let [isModalOpen, setIsModalOpen] = useState(false);
     let [patientData, setPatientData] = useState(null);
+    let navigate = useNavigate();
 
     let openModal = () => setIsModalOpen(true);
     let closeModal = () => setIsModalOpen(false);
@@ -28,7 +30,6 @@ function PatientRecord() {
                 }
             })
                 .then(response => {
-                    console.log('Dữ liệu bệnh nhân:', response.data);
                     setPatientData(response.data);
                 })
                 .catch(error => {
@@ -44,7 +45,7 @@ function PatientRecord() {
         let userData = localStorage.getItem('user');
         userData = JSON.parse(userData);
         cards.push(
-            <div className="patient-card" key="0">
+            <div className="patient-card" key="0" onClick={() => onSelect(userData)}>
                 <FontAwesomeIcon className='patient-avatar' icon={faUser} />
                 <div className="patient-info">
                     <div className="patient-name">{userData.name}</div>
@@ -58,7 +59,7 @@ function PatientRecord() {
         for (let i = 0; i < patientData.length; i++) {
             let patient = patientData[i];
             cards.push(
-                <div className="patient-card" key={patient.id}>
+                <div className="patient-card" key={patient.id} onClick={() => onSelect(patient)}>
                     <FontAwesomeIcon className='patient-avatar' icon={faUser} />
                     <div className="patient-info">
                         <div className="patient-name">{patient.name}</div>
@@ -73,6 +74,10 @@ function PatientRecord() {
         return cards;
     };
 
+    let onSelect = (patient) => {
+        navigate('/select-doctors', { state: { patient: patient } });
+    }
+
     return (
         <div className="registration-page">
             <div className="background-banner">
@@ -82,7 +87,7 @@ function PatientRecord() {
             <div className="registration-container">
                 <div className="progress-steps">
                     <div className="step active">1</div>
-                    <div className="step active">2</div>
+                    <div className="step">2</div>
                     <div className="step">3</div>
                 </div>
 
@@ -97,4 +102,4 @@ function PatientRecord() {
     );
 }
 
-export default PatientRecord;
+export default SelectPatient;
