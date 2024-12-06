@@ -9,7 +9,7 @@ function HeroSection() {
     let navigate = useNavigate();
 
     let handleClickBooking = () => {
-        navigate('/select-patients');
+        navigate('/select-patient');
     }
 
     return (

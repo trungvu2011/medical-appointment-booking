@@ -75,7 +75,7 @@ function SelectPatient() {
     };
 
     let onSelect = (patient) => {
-        navigate('/select-doctors', { state: { patient: patient } });
+        navigate('/select-doctor', { state: { patient: patient } });
     }
 
     return (

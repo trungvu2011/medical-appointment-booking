@@ -1,6 +1,6 @@
 import db from '../models/index';
 
-let handleAllDoctors = async (query) => {
+let handleAllDoctors = async () => {
     return new Promise(async (resolve, reject) => {
         try {
             let doctors = await db.Doctor.findAll();
@@ -48,7 +48,39 @@ let handleAllSpecialties = async () => {
     });
 }
 
+let handleDateListByDoctor = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let doctorId = data.doctor_id;
+            let doctor = await db.Doctor.findOne({
+                where: { id: doctorId }
+            });
+            if (!doctor) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Doctor not found'
+                });
+            }
+            let dateList = await db.Doctor_Schedule.findAll({
+                where: { doctor_id: doctorId }
+            });
+            let list = [];
+            for (let i = 0; i < dateList.length; i++) {
+                let schedule_id = dateList[i].schedule_id;
+                let date = await db.Schedule.findOne({
+                    where: { id: schedule_id }
+                });
+                list.push(date);
+            }
+            resolve(list);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 module.exports = {
     handleAllDoctors: handleAllDoctors,
-    handleAllSpecialties: handleAllSpecialties
+    handleAllSpecialties: handleAllSpecialties,
+    handleDateListByDoctor: handleDateListByDoctor
 }
