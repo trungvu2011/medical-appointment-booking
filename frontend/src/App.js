@@ -6,6 +6,7 @@ import BookingPage from './pages/BookingPage';
 import RecordPage from './pages/RecordPage';
 import DoctorPage from './pages/DoctorPage';
 import SpecialtyPage from './pages/SpecialtyPage';
+import EditPage from './pages/EditPage';
 import axios from 'axios';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/record" element={<RecordPage />} />
         <Route path="/doctors" element={<DoctorPage />} />
         <Route path="/specialties" element={<SpecialtyPage />} />
+        <Route path="/edit" element={<EditPage/>} />
       </Routes>
     </Router>
   );
