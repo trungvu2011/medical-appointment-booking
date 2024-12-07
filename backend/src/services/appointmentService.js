@@ -1,5 +1,7 @@
 import db from '../models/index';
 import moment from 'moment';
+import { Op } from 'sequelize';
+import { Appointment } from '../models/appointment';
 
 let handleBookAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -64,6 +66,34 @@ let handleBookAppointment = (data) => {
     });
 };
 
+// Hàm cập nhật trạng thái của cuộc hẹn
+let updateAppointmentStatus = async () => {
+    try {
+        const now = new Date();  // Lấy thời gian hiện tại
+
+        // Tìm tất cả các cuộc hẹn có trạng thái 'pending' và thời gian khám đã qua
+        const appointments = await Appointment.findAll({
+            where: {
+                status: 'pending',
+                date: {
+                    [Op.lte]: now,  // So sánh ngày khám với thời gian hiện tại (ngày khám đã qua hoặc bằng thời gian hiện tại)
+                },
+            },
+        });
+
+        // Cập nhật trạng thái thành 'completed' cho những cuộc hẹn đã đến giờ khám
+        for (let appointment of appointments) {
+            appointment.status = 'completed';
+            await appointment.save();
+        }
+
+        console.log('Appointments updated to completed successfully!');
+    } catch (error) {
+        console.error('Error updating appointments:', error);
+    }
+}
+
 module.exports = {
     handleBookAppointment: handleBookAppointment,
+    updateAppointmentStatus: updateAppointmentStatus,
 };

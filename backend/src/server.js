@@ -5,6 +5,8 @@ import initWebRoutes from './route/web';
 require('dotenv').config();
 import cors from 'cors';
 import path from 'path';
+import cron from 'node-cron';
+import { updateAppointmentStatus } from './services/appointmentService';
 
 let db = require('./models');
 let app = express();
@@ -31,6 +33,12 @@ db.sequelize.authenticate()
     .catch(err => {
         console.error('Unable to connect to the database:', err);
     });
+
+// update appointment status every minute
+cron.schedule('*/1 * * * *', () => {
+    console.log('Checking for appointments to update...');
+    updateAppointmentStatus();
+});
 
 app.use('/simages', express.static(path.join(__dirname, '..', 'public', 'specialty_images')));
 app.use('/dimages', express.static(path.join(__dirname, '..', 'public', 'doctor_images')));

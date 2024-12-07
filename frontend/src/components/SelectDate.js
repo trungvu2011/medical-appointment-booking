@@ -11,7 +11,8 @@ async function generateWeeksData(doctor_id, weeksToGenerate = 4) {
     let weeks = [];
     try {
         const response = await axios.get('/api/get-date-list-by-doctor', { params: { doctor_id } });
-        const dateList = response.data;
+        const dateList = response.data.dateList;
+        const bookedDateList = response.data.bookedDateList;
 
         // Mảng các ngày trong tuần
         let weekdays = ['CN', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
@@ -28,6 +29,16 @@ async function generateWeeksData(doctor_id, weeksToGenerate = 4) {
                 let availableSlots = dateList
                     .filter(item => item.work_day === dayLabel)
                     .map(item => item.start_time);
+
+                // Lọc ra những giờ đã đặt
+                for (let i = 0; i < bookedDateList.length; i++) {
+                    let bookedDate = new Date(bookedDateList[i].date);
+                    if (bookedDate.getDate() === currentDate.getDate()) {
+                        let bookedTime = bookedDateList[i].start_time;
+                        // Loại bỏ những giờ đã đặt
+                        availableSlots = availableSlots.filter(slot => slot !== bookedTime);
+                    }
+                }
 
                 weekData.push({
                     date: currentDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }),

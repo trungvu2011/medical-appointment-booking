@@ -64,6 +64,16 @@ let handleDateListByDoctor = async (data) => {
             let dateList = await db.Doctor_Schedule.findAll({
                 where: { doctor_id: doctorId }
             });
+            let bookedDateList = await db.Appointment.findAll({
+                attributes: ['id', 'patient_id', 'doctor_id', 'schedule_id', 'date', 'status', 'symptom'],
+                where: { doctor_id: doctorId, status: 'pending' }
+            });
+            for (let i = 0; i < bookedDateList.length; i++) {
+                let schedule = await db.Schedule.findOne({
+                    where: { id: bookedDateList[i].schedule_id }
+                });
+                bookedDateList[i].setDataValue('start_time', schedule.start_time);
+            }
             let list = [];
             for (let i = 0; i < dateList.length; i++) {
                 let schedule_id = dateList[i].schedule_id;
@@ -72,7 +82,10 @@ let handleDateListByDoctor = async (data) => {
                 });
                 list.push(date);
             }
-            resolve(list);
+            resolve({
+                bookedDateList: bookedDateList,
+                dateList: list,
+            });
         } catch (error) {
             reject(error);
         }
