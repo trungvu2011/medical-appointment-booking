@@ -89,6 +89,7 @@ function SelectPatient() {
                     <div className="step active">1</div>
                     <div className="step">2</div>
                     <div className="step">3</div>
+                    <div className="step">4</div>
                 </div>
 
                 <div className="patient-list">

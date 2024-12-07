@@ -87,6 +87,7 @@ const SelectDoctor = () => {
                     <div className="step active">1</div>
                     <div className="step active">2</div>
                     <div className="step">3</div>
+                    <div className="step">4</div>
                 </div>
                 <div className='patient-container'>
                     <h5>Người tới khám</h5>
