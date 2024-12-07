@@ -6,6 +6,7 @@ import { faUser, faUserDoctor, faNotesMedical } from '@fortawesome/free-solid-sv
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck, faClock, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function ConfirmAppointment() {
     let location = useLocation();
@@ -18,14 +19,30 @@ function ConfirmAppointment() {
     let [isConfirmed, setIsConfirmed] = useState(false);
 
     let handleConfirm = () => {
-        setIsConfirmed(true); // Hiển thị thông báo "Đặt khám thành công"
-        let data = {
-            patient: patient,
-            doctor: doctor,
-            appointment: appointment,
+        // Call API to confirm appointment
+        let requestData = {
+            patient_id: patient.id,
+            doctor_id: doctor.id,
+            date: appointment.date,
+            day: appointment.day,
+            time: appointment.time,
             symptom: symptom
         };
-        console.log(data);
+
+        console.log('Request data:', requestData);
+
+        axios.post('/api/book-appointment', requestData)
+            .then(response => {
+                if (response.data.errCode === 0) {
+                    console.log('Đặt lịch hẹn thành công:', response.data);
+                    setIsConfirmed(true);
+                } else {
+                    console.log('Đặt lịch hẹn thất bại:', response.data);
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi đặt lịch hẹn:', error);
+            });
     };
 
     return (
