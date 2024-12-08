@@ -4,42 +4,42 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
-function ModalEdit({ isOpen, onClose }) {
+function ModalEdit({ isOpen, onClose, patient }) {
     // Khai báo state
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
-    const [citizen_id, setCitizenId] = useState('');
+    const [citizenId, setCitizenId] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        if (!isOpen) {
-            // Reset state khi modal đóng
-            setName('');
-            setPhone('');
-            setCitizenId('');
+        console.log(patient);
+        if (isOpen && patient) {
+            setName(patient.name);
+            setPhone(patient.phone);
+            setCitizenId(patient.citizen_id);
             setError('');
             setLoading(false);
         }
     }, [isOpen]);
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // Đúng chính tả
-
-        setLoading(true);
-        setError(''); // Xóa lỗi trước khi gửi
+        e.preventDefault();
+        // setLoading(true);
+        // setError('');
+        console.log('Trung ngu');
 
         const requestData = {
-            name,
-            phone,
-            citizen_id,
+            id: patient.id,
+            name: name,
+            phone: phone,
+            citizen_id: citizenId,
         };
 
         console.log('requestData:', requestData);
 
-        // Gửi request API
         axios
-            .post('/api/edit', requestData)
+            .post('/api/edit-user-info', requestData)
             .then((response) => {
                 if (!response.data.errCode) {
                     console.log('Cập nhật thành công:', response.data);
@@ -60,7 +60,7 @@ function ModalEdit({ isOpen, onClose }) {
     return (
         <Modal show={isOpen} onHide={onClose} centered size="lg">
             <Modal.Header closeButton className="bg-primary text-white">
-                <Modal.Title className="w-100 text-center">Cập nhật thông tin</Modal.Title>
+                <Modal.Title className="w-100 text-center">Chỉnh sửa thông tin</Modal.Title>
             </Modal.Header>
             <Modal.Body className="px-5 py-4">
                 <Form onSubmit={handleSubmit}>
@@ -88,12 +88,12 @@ function ModalEdit({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="citizen_id" className="mb-3">
+                    <Form.Group controlId="citizenId" className="mb-3">
                         <Form.Label>Căn cước công dân</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Nhập căn cước công dân"
-                            value={citizen_id}
+                            value={citizenId}
                             onChange={(e) => setCitizenId(e.target.value)}
                             required
                             className="form-control-lg"

@@ -64,41 +64,14 @@ function PatientEdit() {
                     className="edit-button"
                     onClick={(e) => {
                         e.stopPropagation(); // Ngăn chặn sự kiện chọn thẻ
-                        openModal({id: userData.id,
-                            name: userData.name,
-                            phone: userData.phone,
-                            citizen_id: userData.citizen_id,
-                        });
+                        openModal(userData);
                     }}
                 >
                     Sửa
                 </button>
-                <ModalEdit isOpen={isModalOpen} onClose={closeModal} />
+                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} />
             </div>);
-            // Hiển thị danh sách bệnh nhân
-            // ...patientData.map((patient) => (
-            //     <div
-            //         className={`patient-card ${selectedPatient === patient ? 'active' : ''}`}
-            //         key={patient.id}
-            //         onClick={() => handleSelectPatient(patient)}
-            //     >
-            //         <FontAwesomeIcon className="patient-avatar" icon={faUser} />
-            //         <div className="patient-info">
-            //             <div className="patient-name">{patient.name}</div>
-            //             <div className="patient-details">SĐT: {patient.phone}</div>
-            //         </div>
-            //         <button
-            //             className="edit-button"
-            //             onClick={(e) => {
-            //                 e.stopPropagation(); // Ngăn chặn sự kiện chọn thẻ
-            //                 openModal(patient);
-            //             }}
-            //         >
-            //             Sửa
-            //         </button>
-            //         <ModalEdit isOpen={isModalOpen} onClose={closeModal} />
-            //     </div>
-            // )),
+    
             for (let i = 0; i < patientData.length; i++) {
                 let patient = patientData[i];
                 cards.push(
@@ -114,16 +87,12 @@ function PatientEdit() {
                     className="edit-button"
                     onClick={(e) => {
                         e.stopPropagation(); // Ngăn chặn sự kiện chọn thẻ
-                        openModal({id: patient.id,
-                            name: patient.name,
-                            phone: patient.phone,
-                            citizen_id: patient.citizen_id,
-                        });
+                        openModal(patient);
                     }}
                 >
                     Sửa
                 </button>
-                <ModalEdit isOpen={isModalOpen} onClose={closeModal} />
+                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} />
                     </div>
                 );
             };
@@ -149,10 +118,6 @@ function PatientEdit() {
             <main className="content">
                 {/* Sidebar */}
                 <div className="sidebar">
-                    <button className="search-button">
-                        <FontAwesomeIcon icon={faSearch} />
-                        Tra cứu kết quả khám
-                    </button>
 
                     <div className="patient-list">{renderPatientCards()}</div>
                 </div>
