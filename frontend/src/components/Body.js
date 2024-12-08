@@ -4,6 +4,10 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboardList, faGem, faInbox } from '@fortawesome/free-solid-svg-icons';
+import { faVialCircleCheck, faPumpMedical, faHeartCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faUserMd, faHospital, faFlask, faAward } from '@fortawesome/free-solid-svg-icons';
 
 function Body() {
     let doctorSlider = {
@@ -87,28 +91,102 @@ function Body() {
 
     return (
         <div className='body-container'>
-            <div className="health-banner">
-                <div className="content">
-                    <h1 className="title">Cuộc sống khỏe mạnh là hạnh phúc lớn nhất</h1>
-                    <div className="stats">
-                        <div className="stat-item">
-                            <h2>123</h2>
-                            <p>Expert Doctors</p>
-                        </div>
-                        <div className="stat-item">
-                            <h2>1234</h2>
-                            <p>Medical Staff</p>
-                        </div>
-                        <div className="stat-item">
-                            <h2>12345</h2>
-                            <p>Total Patients</p>
+            <div className='banner-container'>
+                <div className='welcome'>
+                    <h2>WELCOME TO E-HOSPITAL</h2>
+                    <p>We are team of talented designers making websites with Bootstrap</p>
+                </div>
+                <div className='content'>
+                    <div className='why-box'>
+                        <h3>Why Choose Us?</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                        </p>
+                        <div className='learn-more'>
+                            <a href='#'>Learn More</a>
                         </div>
                     </div>
-                </div>
-                <div className="image-container">
-                    <img src={require('../assets/banner.jpg')} alt="Doctors" />
+                    <div className='info-box'>
+                        <div className='box'>
+                            <FontAwesomeIcon icon={faClipboardList} />
+                            <h4>Corporis voluptates officia eiusmod</h4>
+                            <p>
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                            </p>
+                        </div>
+                        <div className='box'>
+                            <FontAwesomeIcon icon={faGem} />
+                            <h4>Corporis voluptates officia eiusmod</h4>
+                            <p>
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                            </p>
+                        </div>
+                        <div className='box'>
+                            <FontAwesomeIcon icon={faInbox} />
+                            <h4>Corporis voluptates officia eiusmod</h4>
+                            <p>
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
+            <div className='about-us'>
+                <img src={require('../assets/about-us-img.avif')}></img>
+                <div className='about-content'>
+                    <h2>About Us</h2>
+                    <p>Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti. Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt reiciendis veritatis asperiores placeat.</p>
+                    <ul>
+                        <li>
+                            <FontAwesomeIcon className='icon' icon={faVialCircleCheck} />
+                            <div>
+                                <h5>Ullamco laboris nisi ut aliquip consequat</h5>
+                                <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
+                            </div>
+                        </li>
+                        <li>
+                            <FontAwesomeIcon className='icon' icon={faPumpMedical} />
+                            <div>
+                                <h5>Magnam soluta odio exercitationem reprehenderi</h5>
+                                <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata redi</p>
+                            </div>
+                        </li>
+                        <li>
+                            <FontAwesomeIcon className='icon' icon={faHeartCircleXmark} />
+                            <div>
+                                <h5>Voluptatem et qui exercitationem</h5>
+                                <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime veniam</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className="stats-container">
+                <div className="stat-box">
+                    <FontAwesomeIcon className='stat-icon' icon={faUserMd} />
+                    <h2>85</h2>
+                    <p>Doctors</p>
+                </div>
+                <div className="stat-box">
+                    <FontAwesomeIcon className='stat-icon' icon={faHospital} />
+                    <h2>18</h2>
+                    <p>Departments</p>
+                </div>
+                <div className="stat-box">
+                    <FontAwesomeIcon className='stat-icon' icon={faFlask} />
+                    <h2>12</h2>
+                    <p>Research Labs</p>
+                </div>
+                <div className="stat-box">
+                    <FontAwesomeIcon className='stat-icon' icon={faAward} />
+                    <h2>150</h2>
+                    <p>Awards</p>
+                </div>
+            </div>
+
 
             <div className='doctor-container'>
                 <div className='doctor-header'>
