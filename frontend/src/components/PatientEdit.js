@@ -9,6 +9,7 @@ function PatientEdit() {
     let [isModalOpen, setIsModalOpen] = useState(false);
     let [patientData, setPatientData] = useState([]);
     let [selectedPatient, setSelectedPatient] = useState(null);
+
     let [mainUser, setMainUser] = useState(JSON.parse(localStorage.getItem('user')));
 
     const fetchPatientData = async () => {
@@ -68,10 +69,6 @@ function PatientEdit() {
         }
     }, []);
 
-    let handleSelectPatient = (patient) => {
-        setSelectedPatient(patient);
-    };
-
     let renderPatientCards = () => {
         let cards = [];
         cards.push(
@@ -122,7 +119,6 @@ function PatientEdit() {
 
     return (
         <div className="patient-edit">
-            {/* Header */}
             <header className="header">
                 <div className="logo">
                     <a href="/">
@@ -135,15 +131,10 @@ function PatientEdit() {
                 </div>
             </header>
 
-            {/* Main Content */}
             <main className="content">
-                {/* Sidebar */}
                 <div className="sidebar">
-
                     <div className="patient-list">{renderPatientCards()}</div>
                 </div>
-
-                {/* Patient Details */}
                 <div className="patient-details">
                     {selectedPatient ? (
                         <div className="details-card">
