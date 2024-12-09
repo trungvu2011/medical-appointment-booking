@@ -9,6 +9,7 @@ import SelectDatePage from './pages/SelectDatePage.js';
 import DoctorPage from './pages/DoctorPage';
 import SpecialtyPage from './pages/SpecialtyPage';
 import ConfirmAppointmentPage from './pages/ConfirmAppointmentPage.js';
+import EditPage from './pages/EditPage';
 import axios from 'axios';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/doctors" element={<DoctorPage />} />
         <Route path="/specialties" element={<SpecialtyPage />} />
         <Route path="/confirm-appointment" element={<ConfirmAppointmentPage />} />
+        <Route path="/edit" element={<EditPage />} />
       </Routes>
     </Router>
   );

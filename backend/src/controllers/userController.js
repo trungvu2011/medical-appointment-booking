@@ -24,7 +24,15 @@ let handleRegister = async (req, res) => {
     let data = await userServices.handleUserRegister(req.body);
     return res.status(200).json(data);
 }
+
+let handleEditUser = async (req, res) => {
+    let data = await userServices.handleUserEdit(req.body);
+    return res.status(200).json(data);
+}
+
 module.exports = {
     handleLogin: handleLogin,
-    handleRegister: handleRegister
+    handleRegister: handleRegister,
+    handleEditUser: handleEditUser
 };
+

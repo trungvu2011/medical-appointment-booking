@@ -122,8 +122,38 @@ let handleUserRegister = (data) => {
     });
 }
 
+let handleUserEdit = (data) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            if (!data.phone || !data.name || !data.citizen_id) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameter',
+                });
+            }
+            let user = await db.User.findOne({where: {id: data.id, }})
+
+            let updatedUser = await user.update({
+                name: data.name,
+                phone: data.phone,
+                citizen_id: data.citizen_id,
+            })
+            
+            resolve({
+                errCode: 0,
+                errMessage: 'Updated',
+                updatedUser
+            });
+        } catch (error) {
+            console.error('Error in edition:', error);
+            reject(error);
+        }
+    });
+}
+
 
 module.exports = {
     handleUserLogin: handleUserLogin,
-    handleUserRegister: handleUserRegister
+    handleUserRegister: handleUserRegister,
+    handleUserEdit: handleUserEdit
 };
