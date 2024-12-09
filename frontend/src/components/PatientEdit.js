@@ -40,7 +40,7 @@ function PatientEdit() {
         setSelectedPatient(patient);
         setIsModalOpen(true);
     };
-    
+
     let closeModal = () => {
         setSelectedPatient(null);
         setIsModalOpen(false);
@@ -87,50 +87,38 @@ function PatientEdit() {
                 >
                     Sửa
                 </button>
-                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} onUpdateSuccess = {fetchPatientData}/>
+                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} onUpdateSuccess={fetchPatientData} />
             </div>);
-    
-            for (let i = 0; i < patientData.length; i++) {
-                let patient = patientData[i];
-                cards.push(
-                    <div className="patient-card" key={patient.id}>
-                        <FontAwesomeIcon className='patient-avatar' icon={faUser} />
-                        <div className="patient-info">
-                            <div className="patient-name">{patient.name}</div>
-                            <div className="patient-details">
-                                SĐT: {patient.phone}
-                            </div>
+
+        for (let i = 0; i < patientData.length; i++) {
+            let patient = patientData[i];
+            cards.push(
+                <div className="patient-card" key={patient.id}>
+                    <FontAwesomeIcon className='patient-avatar' icon={faUser} />
+                    <div className="patient-info">
+                        <div className="patient-name">{patient.name}</div>
+                        <div className="patient-details">
+                            SĐT: {patient.phone}
                         </div>
-                        <button
-                    className="edit-button"
-                    onClick={(e) => {
-                        e.stopPropagation(); // Ngăn chặn sự kiện chọn thẻ
-                        openModal(patient);
-                    }}
-                >
-                    Sửa
-                </button>
-                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} onUpdateSuccess = {fetchPatientData} />
                     </div>
-                );
-            };
-            return cards;
+                    <button
+                        className="edit-button"
+                        onClick={(e) => {
+                            e.stopPropagation(); // Ngăn chặn sự kiện chọn thẻ
+                            openModal(patient);
+                        }}
+                    >
+                        Sửa
+                    </button>
+                    <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} onUpdateSuccess={fetchPatientData} />
+                </div>
+            );
+        };
+        return cards;
     };
 
     return (
         <div className="patient-edit">
-            <header className="header">
-                <div className="logo">
-                    <a href="/">
-                        <FontAwesomeIcon className="hospital-icon" icon={faHospital} />
-                        <h2 className="hospital-name">E-Hospital</h2>
-                    </a>
-                </div>
-                <div className="hotline">
-                    Hotline: <span>1900 6422</span>
-                </div>
-            </header>
-
             <main className="content">
                 <div className="sidebar">
                     <div className="patient-list">{renderPatientCards()}</div>

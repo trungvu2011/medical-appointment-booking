@@ -7,7 +7,7 @@ function EditPage() {
     return (
         <div>
             <Header />
-            <PatientEdit/>
+            <PatientEdit />
             <Footer />
         </div>
     );
