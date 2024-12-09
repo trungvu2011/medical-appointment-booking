@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
-function ModalEdit({ isOpen, onClose, patient }) {
+function ModalEdit({ isOpen, onClose, patient,onUpdateSuccess }) {
     // Khai báo state
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -25,9 +25,6 @@ function ModalEdit({ isOpen, onClose, patient }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // setLoading(true);
-        // setError('');
-        console.log('Trung ngu');
 
         const requestData = {
             id: patient.id,
@@ -43,7 +40,12 @@ function ModalEdit({ isOpen, onClose, patient }) {
             .then((response) => {
                 if (!response.data.errCode) {
                     console.log('Cập nhật thành công:', response.data);
-                    onClose(); // Đóng modal sau khi cập nhật
+                    let userData = JSON.parse(localStorage.getItem('user'));
+                    if (requestData.id === userData.id){
+                        localStorage.setItem('user', JSON.stringify(requestData));
+                    }
+                    onUpdateSuccess();
+                    onClose();
                 } else {
                     setError(response.data.errMessage || 'Đã xảy ra lỗi!');
                 }

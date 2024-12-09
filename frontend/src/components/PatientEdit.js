@@ -9,6 +9,31 @@ function PatientEdit() {
     let [isModalOpen, setIsModalOpen] = useState(false);
     let [patientData, setPatientData] = useState([]);
     let [selectedPatient, setSelectedPatient] = useState(null);
+    let [mainUser, setMainUser] = useState(JSON.parse(localStorage.getItem('user')));
+
+    const fetchPatientData = async () => {
+        const userData = JSON.parse(localStorage.getItem('user'));
+        if (!userData) return;
+        setMainUser(userData);
+
+        try {
+            const response = await axios.get('/api/get-all-members', {
+                params: {
+                    id: userData.id,
+                    phone: userData.phone,
+                    name: userData.name,
+                    citizen_id: userData.citizen_id,
+                },
+            });
+            setPatientData(response.data);
+        } catch (error) {
+            console.error('Lỗi khi lấy dữ liệu bệnh nhân:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchPatientData();
+    }, []);
 
     let openModal = (patient) => {
         setSelectedPatient(patient);
@@ -20,7 +45,6 @@ function PatientEdit() {
         setIsModalOpen(false);
     };
 
-    // Lấy dữ liệu người dùng từ localStorage và gọi API
     useEffect(() => {
         let userData = JSON.parse(localStorage.getItem('user'));
         if (userData) {
@@ -50,26 +74,23 @@ function PatientEdit() {
 
     let renderPatientCards = () => {
         let cards = [];
-        let userData = JSON.parse(localStorage.getItem('user'));
-        if (!userData) return null;
-            // Hiển thị thẻ người dùng chính
         cards.push(
             <div className="patient-card" key="0">
                 <FontAwesomeIcon className="patient-avatar" icon={faUser} />
                 <div className="patient-info">
-                    <div className="patient-name">{userData.name}</div>
-                    <div className="patient-details">SĐT: {userData.phone}</div>
+                    <div className="patient-name">{mainUser.name}</div>
+                    <div className="patient-details">SĐT: {mainUser.phone}</div>
                 </div>
                 <button
                     className="edit-button"
                     onClick={(e) => {
-                        e.stopPropagation(); // Ngăn chặn sự kiện chọn thẻ
-                        openModal(userData);
+                        e.stopPropagation();
+                        openModal(mainUser);
                     }}
                 >
                     Sửa
                 </button>
-                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} />
+                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} onUpdateSuccess = {fetchPatientData}/>
             </div>);
     
             for (let i = 0; i < patientData.length; i++) {
@@ -92,7 +113,7 @@ function PatientEdit() {
                 >
                     Sửa
                 </button>
-                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} />
+                <ModalEdit isOpen={isModalOpen} onClose={closeModal} patient={selectedPatient} onUpdateSuccess = {fetchPatientData} />
                     </div>
                 );
             };
