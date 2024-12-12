@@ -102,7 +102,7 @@ function Body() {
                             Chúng tôi là bệnh viện hàng đầu với sứ mệnh mang lại dịch vụ y tế chất lượng cao cho cộng đồng. Với đội ngũ y bác sĩ giàu kinh nghiệm và các chuyên khoa đa dạng, chúng tôi cam kết đồng hành chăm sóc sức khỏe toàn diện cho bạn.
                         </p>
                         <div className='learn-more'>
-                            <a href='#'>Tìm hiểu thêm</a>
+                            <a href='#about-us'>Tìm hiểu thêm</a>
                         </div>
                     </div>
                     <div className='info-box'>
@@ -126,7 +126,7 @@ function Body() {
                 </div>
             </div>
 
-            <div className='about-us'>
+            <div id='about-us' className='about-us'>
                 <img src={require('../assets/about-us-img.avif')}></img>
                 <div className='about-content'>
                     <h2>About Us</h2>
@@ -154,6 +154,51 @@ function Body() {
                             </div>
                         </li>
                     </ul>
+                </div>
+            </div>
+
+            <div id='news' className='news-container'>
+                <div className="news-header">
+                    <h1>TIN TỨC</h1>
+                    <p>Những tin tức được cập nhật hàng ngày tại E-HOSPITAL</p>
+                </div>
+                <div className='news-home-content'>
+                    <div className='item-news'>
+                        <div className='title-item-news'>
+                            <h4>Tin tức - Sự kiện</h4>
+                        </div>
+                        <div className='news-box'>
+                            <img src={require('../assets/news1.jpg')}></img>
+                            <h3>Hội thảo Ghép mô – tạng và Trao quyết định bổ nhiệm Phó Chủ tịch Hội ghép</h3>
+                            <p className='date'>06/12/2024</p>
+                            <p>Bệnh viện Hữu nghị Việt Đức không chỉ là cơ sở y tế hàng đầu mà còn là biểu tượng tiên phong trong lĩnh vực ghép tạng tại Việt Nam. Với những bước tiến vượt bậc về kỹ thuật, đội…</p>
+                            <button className='detail'>Chi tiết</button>
+                        </div>
+                    </div>
+                    <div className='item-news'>
+                        <div className='title-item-news'>
+                            <h4>Tin tức - Sự kiện</h4>
+                        </div>
+                        <div className='news-box'>
+                            <img src={require('../assets/news2.jpg')}></img>
+                            <h3>Thư mời tham dự Hội thảo Công tác Ghép mô – tạng Bệnh viện Hữu nghị Việt</h3>
+                            <p className='date'>27/11/2024</p>
+                            <p>Trong suốt hơn 20 năm qua, kể từ ca ghép thận đầu tiên được thực hiện thành công vào năm 2002, Bệnh viện Hữu nghị Việt Đức đã không ngừng phát triển và khẳng định vai trò tiên phong…</p>
+                            <button className='detail'>Chi tiết</button>
+                        </div>
+                    </div>
+                    <div className='item-news'>
+                        <div className='title-item-news'>
+                            <h4>Tin tức - Sự kiện</h4>
+                        </div>
+                        <div className='news-box'>
+                            <img src={require('../assets/news3.jpg')}></img>
+                            <h3>Hơn 1.1 tỷ đồng hỗ trợ người bệnh có hoàn cảnh khó khăn trong tháng 11 năm</h3>
+                            <p className='date'>06/12/2024</p>
+                            <p>Trong tháng 11/2024, các nhà hảo tâm đã tiếp tục đồng hành cùng Bệnh viện Hữu nghị Việt Đức trong việc hỗ trợ người bệnh có hoàn cảnh khó khăn, với tổng số tiền quyên góp được là 1.101.574.142 VNĐ…</p>
+                            <button className='detail'>Chi tiết</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
