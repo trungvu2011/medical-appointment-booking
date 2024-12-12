@@ -94,39 +94,32 @@ function Body() {
             <div className='banner-container'>
                 <div className='welcome'>
                     <h2>WELCOME TO E-HOSPITAL</h2>
-                    <p>We are team of talented designers making websites with Bootstrap</p>
                 </div>
                 <div className='content'>
                     <div className='why-box'>
                         <h3>Why Choose Us?</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                            Chúng tôi là bệnh viện hàng đầu với sứ mệnh mang lại dịch vụ y tế chất lượng cao cho cộng đồng. Với đội ngũ y bác sĩ giàu kinh nghiệm và các chuyên khoa đa dạng, chúng tôi cam kết đồng hành chăm sóc sức khỏe toàn diện cho bạn.
                         </p>
                         <div className='learn-more'>
-                            <a href='#'>Learn More</a>
+                            <a href='#'>Tìm hiểu thêm</a>
                         </div>
                     </div>
                     <div className='info-box'>
                         <div className='box'>
                             <FontAwesomeIcon icon={faClipboardList} />
-                            <h4>Corporis voluptates officia eiusmod</h4>
-                            <p>
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            </p>
+                            <h4>Tiện ích vượt trội</h4>
+                            <p>Đảm bảo trải nghiệm tốt nhất với các dịch vụ y tế chất lượng cao và đội ngũ bác sĩ chuyên môn.</p>
                         </div>
                         <div className='box'>
                             <FontAwesomeIcon icon={faGem} />
-                            <h4>Corporis voluptates officia eiusmod</h4>
-                            <p>
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            </p>
+                            <h4>Hệ thống hiện đại</h4>
+                            <p>Cung cấp công nghệ y khoa tiên tiến giúp chẩn đoán và điều trị hiệu quả.</p>
                         </div>
                         <div className='box'>
                             <FontAwesomeIcon icon={faInbox} />
-                            <h4>Corporis voluptates officia eiusmod</h4>
-                            <p>
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            </p>
+                            <h4>Dịch vụ tận tâm</h4>
+                            <p>Đội ngũ y bác sĩ tận tâm, luôn sẵn sàng hỗ trợ bạn với thái độ chuyên nghiệp.</p>
                         </div>
 
                     </div>
@@ -137,27 +130,27 @@ function Body() {
                 <img src={require('../assets/about-us-img.avif')}></img>
                 <div className='about-content'>
                     <h2>About Us</h2>
-                    <p>Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti. Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt reiciendis veritatis asperiores placeat.</p>
+                    <p>Chúng tôi là bệnh viện hàng đầu với sứ mệnh mang lại dịch vụ y tế chất lượng cao cho cộng đồng. Với đội ngũ y bác sĩ giàu kinh nghiệm và các chuyên khoa đa dạng, chúng tôi cam kết đồng hành chăm sóc sức khỏe toàn diện cho bạn.</p>
                     <ul>
                         <li>
                             <FontAwesomeIcon className='icon' icon={faVialCircleCheck} />
                             <div>
-                                <h5>Ullamco laboris nisi ut aliquip consequat</h5>
-                                <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
+                                <h5>Chăm sóc toàn diện</h5>
+                                <p>Cam kết cung cấp các dịch vụ chẩn đoán và điều trị phù hợp nhất với từng bệnh nhân.</p>
                             </div>
                         </li>
                         <li>
                             <FontAwesomeIcon className='icon' icon={faPumpMedical} />
                             <div>
-                                <h5>Magnam soluta odio exercitationem reprehenderi</h5>
-                                <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata redi</p>
+                                <h5>Công nghệ tiên tiến</h5>
+                                <p>Ứng dụng các công nghệ y tế hiện đại nhằm nâng cao hiệu quả điều trị và an toàn.</p>
                             </div>
                         </li>
                         <li>
                             <FontAwesomeIcon className='icon' icon={faHeartCircleXmark} />
                             <div>
-                                <h5>Voluptatem et qui exercitationem</h5>
-                                <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime veniam</p>
+                                <h5>Công nghệ và quy trình chuẩn hóa</h5>
+                                <p>Ứng dụng công nghệ hiện đại giúp chẩn đoán và điều trị chính xác, an toàn.</p>
                             </div>
                         </li>
                     </ul>

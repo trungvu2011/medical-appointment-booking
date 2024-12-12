@@ -62,8 +62,8 @@
                     border: 1px solid white;
                     padding: 10px 20px;
                     text-align: center;
-                    width: 140px;
-                    margin-left: calc(50% - 70px);
+                    width: 160px;
+                    margin-left: calc(50% - 80px);
                     border-radius: 30px;
                     transition: background-color 0.3s;
 
@@ -131,7 +131,6 @@
         margin-bottom: -20px;
 
         img {
-            margin-top: -40px;
             width: 50%;
             height: auto;
             object-fit: cover;
