@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 function ModalEdit({ isOpen, onClose, patient,onUpdateSuccess }) {
-    // Khai báo state
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [citizenId, setCitizenId] = useState('');
@@ -25,7 +24,6 @@ function ModalEdit({ isOpen, onClose, patient,onUpdateSuccess }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const requestData = {
             id: patient.id,
             name: name,
@@ -34,7 +32,6 @@ function ModalEdit({ isOpen, onClose, patient,onUpdateSuccess }) {
         };
 
         console.log('requestData:', requestData);
-
         axios
             .post('/api/edit-user-info', requestData)
             .then((response) => {
