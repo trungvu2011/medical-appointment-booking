@@ -7,6 +7,12 @@ let handleBookAppointment = async (req, res) => {
     return res.status(200).json(data);
 }
 
+let handleGetAppointments = async (req, res) => {
+    let data = await appointmentService.handleGetAppointments(req.query);
+    return res.status(200).json(data);
+}
+
 module.exports = {
-    handleBookAppointment: handleBookAppointment
+    handleBookAppointment: handleBookAppointment,
+    handleGetAppointments: handleGetAppointments
 };

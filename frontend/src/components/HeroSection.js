@@ -12,8 +12,8 @@ function HeroSection() {
         navigate('/select-patient');
     }
 
-    let handleClickEdit = () => {
-        navigate('/edit');
+    let handleClickView = () => {
+        navigate('/view-appointment');
     }
 
     return (
@@ -29,7 +29,7 @@ function HeroSection() {
                             <p>Đặt lịch khám online trước khi tới viện</p>
                         </div>
                     </div>
-                    <div className="service-card" onClick={handleClickEdit}> 
+                    <div className="service-card" onClick={handleClickView}> 
                         <FontAwesomeIcon className='icon' icon={faFileLines} size='3x' />
                         <div className='card-content'>
                             <h3>Hồ sơ sức khỏe</h3>
