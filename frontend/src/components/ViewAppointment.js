@@ -111,13 +111,19 @@ function ViewAppointment() {
         }
         return appointments.map((appointment) => (
             <div className="appointment-card" key={appointment.id}>
-                <p><b>Ngày:</b> {appointment.date}</p>
-                <p><b>Thời gian:</b> {appointment.start_time}</p>
-                <p><b>Triệu chứng:</b> {appointment.symptom}</p>
-                <p><b></b>{appointment.status}</p>
+                <div className="date-container">
+                    <div className="day">{appointment.date.split('-')[2]}</div>
+                    <div className="month-year">{appointment.date.split('-')[1]}/{appointment.date.split('-')[0]}</div>
+                </div>
+                <div className="appointment-info">
+                    <p><b>Thời gian:</b> {appointment.start_time}</p>
+                    <p><b>Triệu chứng:</b> {appointment.symptom}</p>
+                    <p><b>Trạng thái:</b> {appointment.status === 'pending' ? 'Đang chờ' : 'Đã khám'}</p>
+                </div>
             </div>
         ));
     };
+
 
     return (
         <div className="patient-edit">
