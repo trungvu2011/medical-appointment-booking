@@ -112,8 +112,9 @@ function ViewAppointment() {
         return appointments.map((appointment) => (
             <div className="appointment-card" key={appointment.id}>
                 <p><b>Ngày:</b> {appointment.date}</p>
-                <p><b>Thời gian:</b> {appointment.time}</p>
+                <p><b>Thời gian:</b> {appointment.start_time}</p>
                 <p><b>Triệu chứng:</b> {appointment.symptom}</p>
+                <p><b></b>{appointment.status}</p>
             </div>
         ));
     };

@@ -97,33 +97,15 @@ let handleGetAppointments = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let appointmentList = await db.Appointment.findAll({
+                attributes: ['id', 'patient_id', 'doctor_id', 'schedule_id', 'date', 'status', 'symptom'],
                 where: { patient_id: data.id }
             });
-            resolve(appointmentList);
-
-            let allAppointments = [];
 
             for (let i = 0; i < appointmentList.length; i++) {
-                let appointmentInfo = await db.Appointment.findOne({
-                    where: { patient_id: appointmentList[i].id },
-                    attributes: {
-                        include: ['date', 'symtom'],
-                        exclude: ['createdAt', 'updatedAt']
-                    },
+                let schedule = await db.Schedule.findOne({
+                    where: { id: appointmentList[i].schedule_id }
                 });
-                let scheduleInfo = await db.Schedule.findOne({
-                    where: {id: appointmentList[i].schedule_id},
-                    attributes: {
-                        include: ['start_time'],
-                        exclude: ['createdAt', 'updatedAt']
-                    }
-                });
-                let combinedInfo = {
-                    date: appointmentInfo.date,
-                    time: scheduleInfo.start_time,
-                    symtom: appointmentInfo.symtom
-                }
-                allAppointments.push(combinedInfo);
+                appointmentList[i].setDataValue('start_time', schedule.start_time);
             }
 
             resolve(appointmentList);
