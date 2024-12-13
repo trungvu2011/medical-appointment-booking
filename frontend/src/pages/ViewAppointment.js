@@ -1,16 +1,16 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import PatientEdit from '../components/PatientEdit';
+import ViewAppointment from '../components/ViewAppointment';
 
-function EditPage() {
+function ViewPage() {
     return (
         <div>
             <Header />
-            <PatientEdit />
+            <ViewAppointment />
             <Footer />
         </div>
     );
 }
 
-export default EditPage;
+export default ViewPage;

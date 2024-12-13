@@ -88,6 +88,8 @@ let handleAllMembers = (data) => {
     });
 }
 
+
+
 module.exports = {
     handleAddNewMember: handleAddNewMember,
     handleAllMembers: handleAllMembers

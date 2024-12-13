@@ -10,7 +10,9 @@ let handleGetAllMembers = async (req, res) => {
     return res.status(200).json(data);
 }
 
+
+
 module.exports = {
     handleAddMember: handleAddMember,
-    handleGetAllMembers: handleGetAllMembers
+    handleGetAllMembers: handleGetAllMembers,
 }
