@@ -37,6 +37,23 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      degree_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Degrees',
+          key: 'id',
+        },
+
+      },
+      academic_rank_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'AcademicRanks',
+          key: 'id',
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

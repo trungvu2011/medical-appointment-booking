@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         through: models.Doctor_Schedule,
         foreignKey: 'doctor_id',
       });
+      Doctor.belongsTo(models.Degree, { foreignKey: 'degree_id' });
+      Doctor.belongsTo(models.AcademicRank, { foreignKey: 'academic_rank_id' });
     }
   }
   Doctor.init({
@@ -24,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     price_service: DataTypes.INTEGER,
     level: DataTypes.STRING,
     img: DataTypes.STRING,
+    degree_id: DataTypes.INTEGER,
+    academic_rank_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Doctor',

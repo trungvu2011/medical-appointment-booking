@@ -15,6 +15,18 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      birthday: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      healthInsurance: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
