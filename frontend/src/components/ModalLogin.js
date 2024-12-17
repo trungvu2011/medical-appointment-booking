@@ -33,7 +33,6 @@ function ModalLogin({ isOpen, onClose }) {
         axios.post('/api/login', requestData)
             .then(response => {
                 if (response.data.errCode === 0) {
-                    console.log('Đăng nhập thành công:', response.data);
                     localStorage.setItem('user', JSON.stringify(response.data.user));
                     setLoading(false);
                     onClose();

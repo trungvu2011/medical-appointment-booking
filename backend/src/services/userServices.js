@@ -77,26 +77,32 @@ let checkUserCitizenId = async (citizenId) => {
 let handleUserRegister = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.phone || !data.password || !data.name || !data.citizen_id) {
+            if (!data.phone || !data.password || !data.name || !data.citizen_id
+                || !data.birthday || !data.healthInsurance || !data.address) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing required parameter',
                 });
             }
+
             let newUser = {};
             let isPhoneExist = await checkUserPhone(data.phone);
             let isCitizenIdExist = await checkUserCitizenId(data.citizen_id);
+
             if (isPhoneExist || isCitizenIdExist) {
                 let existUser = await db.User.findOne({
                     where: {
                         phone: data.phone,
                     }
                 });
+
                 if (!existUser.password) {
                     existUser.name = data.name;
                     existUser.citizen_id = data.citizen_id;
                     existUser.password = bcrypt.hashSync(data.password, salt);
                     existUser.phone = data.phone;
+                    existUser.birthday = data.birthday;
+                    existUser.healthInsurance = data.healthInsurance;
                     await existUser.save();
                     newUser = existUser;
                 } else {
@@ -109,10 +115,13 @@ let handleUserRegister = (data) => {
                     phone: data.phone,
                     password: hashPassword,
                     name: data.name,
-                    citizen_id: data.citizen_id
+                    citizen_id: data.citizen_id,
+                    address: data.address,
+                    birthday: data.birthday, // Lưu ngày sinh đã chuyển định dạng
+                    healthInsurance: data.healthInsurance,
                 });
-
             }
+
             resolve(newUser);
 
         } catch (error) {
@@ -122,8 +131,9 @@ let handleUserRegister = (data) => {
     });
 }
 
+
 let handleUserEdit = (data) => {
-    return new Promise(async(resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         try {
             if (!data.phone || !data.name || !data.citizen_id) {
                 resolve({
@@ -131,14 +141,14 @@ let handleUserEdit = (data) => {
                     errMessage: 'Missing required parameter',
                 });
             }
-            let user = await db.User.findOne({where: {id: data.id, }})
+            let user = await db.User.findOne({ where: { id: data.id, } })
 
             let updatedUser = await user.update({
                 name: data.name,
                 phone: data.phone,
                 citizen_id: data.citizen_id,
             })
-            
+
             resolve({
                 errCode: 0,
                 errMessage: 'Updated',

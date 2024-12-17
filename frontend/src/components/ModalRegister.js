@@ -5,12 +5,15 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 function ModalRegister({ isOpen, onClose }) {
-    let [citizen_id, setCitizenId] = useState('');
-    let [name, setName] = useState('');
-    let [phone, setPhone] = useState('');
-    let [password, setPassword] = useState('');
-    let [loading, setLoading] = useState(false);
-    let [error, setError] = useState('');
+    const [citizen_id, setCitizenId] = useState('');
+    const [healthInsurance, setHealthInsurance] = useState('');
+    const [address, setAddress] = useState('');
+    const [birthday, setBirthday] = useState('');
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     // Reset form when modal is closed
     useEffect(() => {
@@ -19,6 +22,9 @@ function ModalRegister({ isOpen, onClose }) {
             setPhone('');
             setPassword('');
             setCitizenId('');
+            setHealthInsurance('');
+            setBirthday('');
+            setAddress('');
             setLoading(false);
             setError('');
         }
@@ -34,13 +40,15 @@ function ModalRegister({ isOpen, onClose }) {
             name: name,
             phone: phone,
             password: password,
-            citizen_id: citizen_id
+            citizen_id: citizen_id,
+            healthInsurance: healthInsurance,
+            birthday: birthday,
+            address: address,
         };
-
-        console.log('requestData:', requestData);
 
         axios.post('/api/register', requestData)
             .then(response => {
+                console.log('Đăng ký:', response.data);
                 if (!response.data.errCode) {
                     // Đăng ký thành công
                     localStorage.setItem('token', response.data.token);
@@ -102,6 +110,18 @@ function ModalRegister({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
+                    <Form.Group controlId="birthday" className="mb-3">
+                        <Form.Label>Ngày sinh</Form.Label>
+                        <Form.Control
+                            type="date"
+                            placeholder="Nhập Ngày sinh"
+                            value={birthday}
+                            onChange={(e) => setBirthday(e.target.value)}
+                            required
+                            className="form-control-lg"
+                        />
+                    </Form.Group>
+
                     <Form.Group controlId="citizen_id" className="mb-3">
                         <Form.Label>Căn cước công dân</Form.Label>
                         <Form.Control
@@ -109,6 +129,30 @@ function ModalRegister({ isOpen, onClose }) {
                             placeholder="Nhập căn cước công dân"
                             value={citizen_id}
                             onChange={(e) => setCitizenId(e.target.value)}
+                            required
+                            className="form-control-lg"
+                        />
+                    </Form.Group>
+
+                    <Form.Group controlId="healthInsurance" className="mb-3">
+                        <Form.Label>Bảo hiểm y tế</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Nhập Bảo hiểm y tế"
+                            value={healthInsurance}
+                            onChange={(e) => setHealthInsurance(e.target.value)}
+                            required
+                            className="form-control-lg"
+                        />
+                    </Form.Group>
+
+                    <Form.Group controlId="healthInsurance" className="mb-3">
+                        <Form.Label>Địa chỉ</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Nhập Địa chỉ"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                             required
                             className="form-control-lg"
                         />
