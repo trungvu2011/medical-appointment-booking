@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Degree.init({
     name: DataTypes.STRING,
-    abbreviation: DataTypes.STRING
+    abbreviation: DataTypes.STRING,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Degree',

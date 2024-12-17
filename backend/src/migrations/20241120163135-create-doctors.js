@@ -35,7 +35,7 @@ module.exports = {
       },
       degree_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'Degrees',
           key: 'id',
@@ -44,7 +44,7 @@ module.exports = {
       },
       academic_rank_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'AcademicRanks',
           key: 'id',
