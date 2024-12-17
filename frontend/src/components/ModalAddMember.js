@@ -5,11 +5,14 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 function ModalAddMember({ isOpen, onClose }) {
-    let [citizen_id, setCitizenId] = useState('');
-    let [name, setName] = useState('');
-    let [phone, setPhone] = useState('');
-    let [loading, setLoading] = useState(false);
-    let [error, setError] = useState('');
+    const [citizen_id, setCitizenId] = useState('');
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [birthday, setBirthday] = useState('');
+    const [healthInsurance, setHealthInsurance] = useState('');
+    const [address, setAddress] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     // Reset form when modal is closed
     useEffect(() => {
@@ -17,6 +20,9 @@ function ModalAddMember({ isOpen, onClose }) {
             setName('');
             setPhone('');
             setCitizenId('');
+            setBirthday('');
+            setHealthInsurance('');
+            setAddress('');
             setLoading(false);
             setError('');
         }
@@ -39,7 +45,10 @@ function ModalAddMember({ isOpen, onClose }) {
             user_id: user.id,
             name: name,
             phone: phone,
-            citizen_id: citizen_id
+            citizen_id: citizen_id,
+            birthday: birthday,
+            healthInsurance: healthInsurance,
+            address: address,
         };
 
         axios.post('/api/add-member', requestData)
@@ -100,6 +109,18 @@ function ModalAddMember({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
+                    <Form.Group controlId="birthday" className="mb-3">
+                        <Form.Label>Ngày sinh</Form.Label>
+                        <Form.Control
+                            type="date"
+                            placeholder="Nhập Ngày sinh"
+                            value={birthday}
+                            onChange={(e) => setBirthday(e.target.value)}
+                            required
+                            className="form-control-lg"
+                        />
+                    </Form.Group>
+
                     <Form.Group controlId="citizen_id" className="mb-3">
                         <Form.Label>Căn cước công dân</Form.Label>
                         <Form.Control
@@ -107,6 +128,30 @@ function ModalAddMember({ isOpen, onClose }) {
                             placeholder="Nhập căn cước công dân"
                             value={citizen_id}
                             onChange={(e) => setCitizenId(e.target.value)}
+                            required
+                            className="form-control-lg"
+                        />
+                    </Form.Group>
+
+                    <Form.Group controlId="healthInsurance" className="mb-3">
+                        <Form.Label>Bảo hiểm y tế</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Nhập Bảo hiểm y tế"
+                            value={healthInsurance}
+                            onChange={(e) => setHealthInsurance(e.target.value)}
+                            required
+                            className="form-control-lg"
+                        />
+                    </Form.Group>
+
+                    <Form.Group controlId="address" className="mb-3">
+                        <Form.Label>Địa chỉ</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Nhập Địa chỉ"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                             required
                             className="form-control-lg"
                         />

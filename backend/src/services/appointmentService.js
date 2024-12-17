@@ -1,7 +1,6 @@
 import db from '../models/index';
 import moment from 'moment';
 import { Op } from 'sequelize';
-import { Appointment } from '../models/appointment';
 
 let handleBookAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -73,7 +72,7 @@ let updateAppointmentStatus = async () => {
         const now = new Date();  // Lấy thời gian hiện tại
 
         // Tìm tất cả các cuộc hẹn có trạng thái 'pending' và thời gian khám đã qua
-        const appointments = await Appointment.findAll({
+        const appointments = await db.Appointment.findAll({
             where: {
                 status: 'pending',
                 date: {

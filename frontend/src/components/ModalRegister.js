@@ -146,7 +146,7 @@ function ModalRegister({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="healthInsurance" className="mb-3">
+                    <Form.Group controlId="address" className="mb-3">
                         <Form.Label>Địa chỉ</Form.Label>
                         <Form.Control
                             type="text"

@@ -43,7 +43,10 @@ let handleAddNewMember = (data) => {
                     phone: data.phone,
                     name: data.name,
                     password: '',
-                    citizen_id: data.citizen_id
+                    citizen_id: data.citizen_id,
+                    address: data.address,
+                    birthday: data.birthday,
+                    healthInsurance: data.healthInsurance,
                 });
                 await db.User_Member.create({
                     user_id: data.user_id,
