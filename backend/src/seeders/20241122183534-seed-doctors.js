@@ -32,8 +32,8 @@ module.exports = {
       { name: 'Nguyễn Chí Thành', specialty_id: 5, degree_id: null, academic_rank_id: 5, img: '/dimages/bs-nguyen-chi-thanh.jpg', price_service: 300000, createdAt: new Date(), updatedAt: new Date() },
 
       // Chuyên khoa 6: Hô hấp - Phổi
-      { name: 'Phan Thị Hương Liên', specialty_id: 6, degree_id: null, academic_rank_id: 3, img: '/dimages/bs-nguyen-chi-thanh.jpg', price_service: 200000, createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Phan Thị Hương Liên', specialty_id: 6, degree_id: null, academic_rank_id: 3, img: '/dimages/bs-nguyen-chi-thanh.jpg', price_service: 200000, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Hoàng Chân Phương', specialty_id: 6, degree_id: null, academic_rank_id: 3, img: '/dimages/bs-hoang-chan-phuong.jpg', price_service: 200000, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Dương Anh Phượng', specialty_id: 6, degree_id: null, academic_rank_id: 3, img: '/dimages/bs-duong-anh-phuong.jpg', price_service: 200000, createdAt: new Date(), updatedAt: new Date() },
 
       // Chuyên khoa 7: Mắt
       { name: 'Lê Thị Hồng Nhung', specialty_id: 7, degree_id: null, academic_rank_id: 4, img: '/dimages/bs-le-thi-hong-nhung.jpg', price_service: 300000, createdAt: new Date(), updatedAt: new Date() },

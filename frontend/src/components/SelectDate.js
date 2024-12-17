@@ -71,6 +71,7 @@ function SelectDate() {
     let navigate = useNavigate();
     let patient = location.state?.patient;
     let doctor = location.state?.doctor;
+    let [adjustedPrice, setAdjustedPrice] = useState(doctor?.price_service);
 
     let [weeks, setWeeks] = useState([]); // Danh sách các tuần
     let [currentWeek, setCurrentWeek] = useState(0); // Tuần hiện tại
@@ -93,6 +94,7 @@ function SelectDate() {
                     patient,
                     doctor,
                     appointment: {
+                        price: adjustedPrice,   // Giá khám
                         date: selectedDate.date, // Ngày (dd/mm/yyyy)
                         day: selectedDate.day,   // Thứ
                         time: selectedTime,      // Giờ
@@ -114,6 +116,21 @@ function SelectDate() {
 
     let toggleDateVisibility = () => {
         setIsDateVisible((prev) => !prev); // Chuyển đổi trạng thái hiển thị lịch
+    };
+
+    let formatCurrency = (value) => {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value).replace('₫', 'VNĐ');
+    };
+
+    let handleDateSelect = (date) => {
+        setSelectedDate({ date: date.date, day: date.day });
+
+        // Kiểm tra nếu ngày là thứ 7 hoặc CN
+        if (date.day === 'Thứ 7' || date.day === 'CN') {
+            setAdjustedPrice(Math.round(doctor?.price_service * 1.5)); // Cộng thêm 50%
+        } else {
+            setAdjustedPrice(doctor?.price_service); // Giữ nguyên giá
+        }
     };
 
     return (
@@ -150,7 +167,7 @@ function SelectDate() {
                     <FontAwesomeIcon className="specialty-icon" icon={faNotesMedical} />
                     <div className='specialty'>
                         <div className="specialty-name">{doctor?.specialty}</div>
-                        <div className="specialty-price">{doctor?.price_service} VND</div>
+                        <div className="specialty-price">{formatCurrency(adjustedPrice)}</div>
                     </div>
                     <FontAwesomeIcon className="specialty-select" icon={faChevronRight} />
                 </div>
@@ -166,29 +183,29 @@ function SelectDate() {
                             <FontAwesomeIcon icon={faChevronLeft} />
                         </button>
                         {weeks[currentWeek]?.map((date) => {
-                            // Tạo đối tượng Date từ date.date (chỉ có ngày-tháng) và thêm năm hiện tại
                             let currentYear = new Date().getFullYear();
                             let dateParts = date.date.split('/');
-                            let selectedDate = new Date(`${currentYear}/${dateParts[1]}/${dateParts[0]}`);
-                            selectedDate.setHours(0, 0, 0, 0);
+                            let selectedDateObj = new Date(`${currentYear}/${dateParts[1]}/${dateParts[0]}`);
+                            selectedDateObj.setHours(0, 0, 0, 0);
                             let currentDate = new Date();
                             currentDate.setHours(0, 0, 0, 0);
 
-                            let isPastDate = selectedDate < currentDate;
+                            let isPastDate = selectedDateObj < currentDate;
                             let isAvailable = date.slots.length > 0;
                             let isNotAvailable = isPastDate || !isAvailable;
 
                             return (
                                 <div
                                     key={date.date}
-                                    className={`date-card ${selectedDate.getTime() === new Date(date.date).getTime() ? 'selected' : ''} ${isNotAvailable ? 'not-available' : ''}`}
-                                    onClick={!isNotAvailable ? () => setSelectedDate({ date: date.date, day: date.day }) : undefined}
+                                    className={`date-card ${selectedDate?.date === date.date ? 'selected' : ''} ${isNotAvailable ? 'not-available' : ''}`}
+                                    onClick={!isNotAvailable ? () => handleDateSelect(date) : undefined}
                                 >
                                     <div className="date-day">{date.day}</div>
                                     <div className="date-number">{date.date.slice(0, 5)}</div>
                                 </div>
                             );
                         })}
+
                         <button
                             className="date-navigator"
                             onClick={handleNextWeek}

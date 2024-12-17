@@ -26,7 +26,8 @@ function ConfirmAppointment() {
             date: appointment.date,
             day: appointment.day,
             time: appointment.time,
-            symptom: symptom
+            symptom: symptom,
+            price: appointment.price,
         };
 
         console.log('Request data:', requestData);
@@ -43,6 +44,10 @@ function ConfirmAppointment() {
             .catch(error => {
                 console.error('Lỗi khi đặt lịch hẹn:', error);
             });
+    };
+
+    let formatCurrency = (value) => {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value).replace('₫', 'VNĐ');
     };
 
     return (
@@ -87,7 +92,7 @@ function ConfirmAppointment() {
                         <div className="specialty">
                             <div className="specialty-text">Chuyên khoa khám</div>
                             <div className="specialty-name">{doctor?.specialty}</div>
-                            <div className="price">{doctor?.price_service} VND</div>
+                            <div className="price">{formatCurrency(appointment?.price)}</div>
                         </div>
                     </div>
                     <div className="appointment-time">

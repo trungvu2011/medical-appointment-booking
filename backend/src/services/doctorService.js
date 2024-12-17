@@ -9,7 +9,29 @@ let handleAllDoctors = async () => {
                     let specialty = await db.Specialty.findOne({
                         where: { id: doctors[i].specialty_id }
                     });
+                    let degree = await db.Degree.findOne({
+                        where: { id: doctors[i].degree_id }
+                    });
+                    let academicRank = await db.AcademicRank.findOne({
+                        where: { id: doctors[i].academic_rank_id }
+                    });
                     doctors[i].setDataValue('specialty', specialty.name);
+                    if (!degree) {
+                        doctors[i].setDataValue('degree', null);
+                        doctors[i].setDataValue('deg', null);
+                    } else {
+                        doctors[i].setDataValue('degree', degree.name);
+                        doctors[i].setDataValue('deg', degree.abbreviation);
+                    }
+                    if (!academicRank) {
+                        doctors[i].setDataValue('academic_rank', null);
+                        doctors[i].setDataValue('aca_rank', null);
+                    } else {
+                        doctors[i].setDataValue('academic_rank', academicRank.name);
+                        doctors[i].setDataValue('aca_rank', academicRank.abbreviation);
+
+                    }
+
                 }
                 resolve({
                     errCode: 0,

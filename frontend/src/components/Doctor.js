@@ -7,12 +7,41 @@ function Doctor() {
     const [specialties, setSpecialties] = useState([]);
     const [searchName, setSearchName] = useState('');
     const [searchSpecialty, setSearchSpecialty] = useState('');
+    const [searchLevel, setSearchLevel] = useState('');
+    const [levels, setLevels] = useState([]);
 
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
                 const doctorResponse = await axios.get('/api/get-all-doctors');
-                setDoctors(doctorResponse.data.data);
+                const fetchedDoctors = doctorResponse.data.data;
+
+                // Tạo bản sao và thay đổi aca_rank
+                const updatedDoctors = fetchedDoctors.map((doctor) => {
+                    if ((doctor.deg === 'GS' || doctor.deg === 'PGS') && doctor.aca_rank) {
+                        doctor.aca_rank = 'TS';
+                        doctor.academic_rank = 'Tiến sĩ';
+                    }
+                    if (doctor.degree && doctor.academic_rank) {
+                        doctor.level = `${doctor.degree} ${doctor.academic_rank}`;
+                    } else if (doctor.degree) {
+                        doctor.level = doctor.degree;
+                    } else if (doctor.academic_rank) {
+                        doctor.level = doctor.academic_rank;
+                    }
+
+                    // Kiểm tra xem level đã có trong mảng levels chưa
+                    setLevels((prevLevels) => {
+                        if (!prevLevels.includes(doctor.level)) {
+                            return [...prevLevels, doctor.level]; // Nếu chưa có, thêm mới
+                        }
+                        return prevLevels; // Nếu có rồi, không thêm
+                    });
+
+                    return doctor;
+                });
+
+                setDoctors(updatedDoctors); // Cập nhật state với bản sao đã thay đổi
             } catch (error) {
                 console.error('There was an error fetching the doctor data!', error);
             }
@@ -31,10 +60,12 @@ function Doctor() {
         fetchSpecialties();
     }, []);
 
+
     const filteredDoctors = doctors.filter((doctor) => {
         return (
             doctor.name.toLowerCase().includes(searchName.toLowerCase()) &&
-            doctor.specialty.toLowerCase().includes(searchSpecialty.toLowerCase())
+            doctor.specialty.toLowerCase().includes(searchSpecialty.toLowerCase()) &&
+            (searchLevel === '' || doctor.level.toLowerCase().includes(searchLevel.toLowerCase()))
         );
     });
 
@@ -60,6 +91,17 @@ function Doctor() {
                         </option>
                     ))}
                 </select>
+                <select
+                    value={searchLevel}
+                    onChange={(e) => setSearchLevel(e.target.value)}
+                >
+                    <option value="">Tất cả học hàm học vị</option>
+                    {levels.map((level) => (
+                        <option key={level} value={level}>
+                            {level}
+                        </option>
+                    ))}
+                </select>
             </div>
 
             <div className="doctor-list">
@@ -68,7 +110,7 @@ function Doctor() {
                         <div key={doctor.id} className="doctor-card">
                             <img src={doctor.img} alt={doctor.name} className="doctor-image" />
                             <div className="doctor-info">
-                                <h3 className="doctor-name">{doctor.level} {doctor.name}</h3>
+                                <h3 className="doctor-name">{doctor.deg} {doctor.aca_rank} {doctor.name}</h3>
                                 <p className="doctor-specialty">{doctor.specialty}</p>
                                 <button className="detail-button">Xem chi tiết</button>
                             </div>

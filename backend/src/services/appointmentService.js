@@ -49,6 +49,7 @@ let handleBookAppointment = (data) => {
                 date: data.date,
                 status: 'pending',
                 symptom: data.symptom,
+                price: data.price,
             });
 
             resolve({
