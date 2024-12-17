@@ -25,10 +25,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      level: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       img: {
         type: Sequelize.STRING,
         allowNull: false,
