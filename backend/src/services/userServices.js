@@ -13,7 +13,7 @@ let handleUserLogin = (phone, password) => {
             if (isExist) {
                 let user = await db.User.findOne({
                     where: { phone: phone },
-                    attributes: ['id', 'phone', 'password', 'name', 'citizen_id'],
+                    attributes: ['id', 'phone', 'password', 'name', 'citizen_id', 'birthday', 'address', 'healthInsurance'],
                 });
                 if (user) {
                     let check = await bcrypt.compareSync(password, user.password);

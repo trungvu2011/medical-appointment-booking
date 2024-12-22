@@ -75,7 +75,7 @@ let handleAllMembers = (data) => {
                 let memberInfo = await db.User.findOne({
                     where: { id: memberList[i].member_id },
                     attributes: {
-                        include: ['id', 'name', 'phone', 'citizen_id'],
+                        include: ['id', 'name', 'phone', 'citizen_id', 'address', 'birthday', 'healthInsurance'],
                         exclude: ['password', 'createdAt', 'updatedAt']
                     },
 

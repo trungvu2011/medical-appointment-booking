@@ -21,10 +21,7 @@ function ViewAppointment() {
         try {
             const response = await axios.get('/api/get-all-members', {
                 params: {
-                    id: userData.id,
-                    phone: userData.phone,
-                    name: userData.name,
-                    citizen_id: userData.citizen_id,
+                    id: userData.id
                 },
             });
             setPatientData(response.data);
@@ -119,6 +116,9 @@ function ViewAppointment() {
                     <p><b>Thời gian:</b> {appointment.start_time}</p>
                     <p><b>Triệu chứng:</b> {appointment.symptom}</p>
                     <p><b>Trạng thái:</b> {appointment.status === 'pending' ? 'Đang chờ' : 'Đã khám'}</p>
+                    <p><b>Bác sĩ:</b> {appointment.doctor}</p>
+                    <p><b>Phòng:</b> {appointment.room}</p>
+                    <p><b>Địa Chỉ:</b> {appointment.base}</p>
                 </div>
             </div>
         ));

@@ -105,7 +105,16 @@ let handleGetAppointments = (data) => {
                 let schedule = await db.Schedule.findOne({
                     where: { id: appointmentList[i].schedule_id }
                 });
+                let room = await db.Room.findOne({
+                    where: { doctor_id: appointmentList[i].doctor_id }
+                })
+                let doctor = await db.Doctor.findOne({
+                    where: { id: appointmentList[i].doctor_id }
+                })
                 appointmentList[i].setDataValue('start_time', schedule.start_time);
+                appointmentList[i].setDataValue('room', room.name);
+                appointmentList[i].setDataValue('base', room.base);
+                appointmentList[i].setDataValue('doctor', doctor.name)
             }
 
             resolve(appointmentList);

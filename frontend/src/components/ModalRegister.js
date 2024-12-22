@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 function ModalRegister({ isOpen, onClose }) {
     const [citizen_id, setCitizenId] = useState('');
@@ -110,15 +112,22 @@ function ModalRegister({ isOpen, onClose }) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="birthday" className="mb-3">
+                    <Form.Group controlId="birthday" className="mb-3 d-flex flex-column">
                         <Form.Label>Ngày sinh</Form.Label>
-                        <Form.Control
-                            type="date"
-                            placeholder="Nhập Ngày sinh"
-                            value={birthday}
-                            onChange={(e) => setBirthday(e.target.value)}
-                            required
-                            className="form-control-lg"
+                        <DatePicker
+                            selected={birthday ? new Date(birthday) : null} // Chuyển đổi chuỗi yyyy-mm-dd thành Date
+                            onChange={(date) => {
+                                if (date) {
+                                    // Chuyển đổi ngày từ Date sang định dạng yyyy-mm-dd
+                                    const formattedDate = date.toISOString().split('T')[0];
+                                    setBirthday(formattedDate);
+                                } else {
+                                    setBirthday('');
+                                }
+                            }}
+                            dateFormat="dd-MM-yyyy" // Hiển thị định dạng dd-MM-yyyy
+                            className="form-control form-control-lg" // Thêm class form-control để giống các trường khác
+                            placeholderText="Nhập ngày sinh"
                         />
                     </Form.Group>
 
