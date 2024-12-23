@@ -114,8 +114,62 @@ let handleDateListByDoctor = async (data) => {
     });
 }
 
+let handleDoctorById = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let doctor = await db.Doctor.findOne({
+                where: { id: data.id }
+            });
+            if (doctor) {
+                let specialty = await db.Specialty.findOne({
+                    where: { id: doctor.specialty_id }
+                });
+                let degree = await db.Degree.findOne({
+                    where: { id: doctor.degree_id }
+                });
+                let academicRank = await db.AcademicRank.findOne({
+                    where: { id: doctor.academic_rank_id }
+                });
+                doctor.setDataValue('specialty', specialty.name);
+                if (!degree) {
+                    doctor.setDataValue('degree', null);
+                    doctor.setDataValue('deg', null);
+                } else {
+                    doctor.setDataValue('degree', degree.name);
+                    doctor.setDataValue('deg', degree.abbreviation);
+                }
+                if (!academicRank) {
+                    doctor.setDataValue('academic_rank', null);
+                    doctor.setDataValue('aca_rank', null);
+                } else {
+                    doctor.setDataValue('academic_rank', academicRank.name);
+                    doctor.setDataValue('aca_rank', academicRank.abbreviation);
+                }
+
+                let room = await db.Room.findOne({
+                    where: { doctor_id: doctor.id }
+                });
+                doctor.setDataValue('base', room.base);
+
+                resolve({
+                    errCode: 0,
+                    data: doctor
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Doctor not found'
+                });
+            }
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 module.exports = {
     handleAllDoctors: handleAllDoctors,
     handleAllSpecialties: handleAllSpecialties,
-    handleDateListByDoctor: handleDateListByDoctor
+    handleDateListByDoctor: handleDateListByDoctor,
+    handleDoctorById: handleDoctorById
 }

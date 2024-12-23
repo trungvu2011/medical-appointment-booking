@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Specialty.scss';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Specialty() {
+    const navigate = useNavigate();
     const [specialties, setSpecialties] = useState([]);
 
     useEffect(() => {
@@ -28,7 +30,9 @@ function Specialty() {
                             <div className="specialty-info">
                                 <h2 className="specialty-name">{specialty.name}</h2>
                                 <p className="specialty-description">{specialty.description}</p>
-                                <button className="detail-button">Xem chi tiết</button>
+                                <button className="detail-button"
+                                    onClick={() => navigate(`/specialty/${specialty.id}`, { state: { specialty } })}
+                                >Xem chi tiết</button>
                             </div>
                         </div>
                     ))

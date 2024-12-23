@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ViewAppointment.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSearch, faChevronRight, faHospital } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import ModalEdit from './ModalEdit';
 import axios from 'axios';
 

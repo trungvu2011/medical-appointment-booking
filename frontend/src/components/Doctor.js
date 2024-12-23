@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Doctor.scss';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Doctor() {
+    const navigate = useNavigate();
     const [doctors, setDoctors] = useState([]);
     const [specialties, setSpecialties] = useState([]);
     const [searchName, setSearchName] = useState('');
@@ -18,12 +20,12 @@ function Doctor() {
 
                 // Tạo bản sao và thay đổi aca_rank
                 const updatedDoctors = fetchedDoctors.map((doctor) => {
-                    if ((doctor.deg === 'GS' || doctor.deg === 'PGS') && doctor.aca_rank) {
-                        doctor.aca_rank = 'TS';
-                        doctor.academic_rank = 'Tiến sĩ';
+                    if ((doctor.aca_rank === 'GS' || doctor.aca_rank === 'PGS') && doctor.deg) {
+                        doctor.deg = 'TS';
+                        doctor.degree = 'Tiến sĩ';
                     }
                     if (doctor.degree && doctor.academic_rank) {
-                        doctor.level = `${doctor.degree} ${doctor.academic_rank}`;
+                        doctor.level = `${doctor.academic_rank} ${doctor.degree}`;
                     } else if (doctor.degree) {
                         doctor.level = doctor.degree;
                     } else if (doctor.academic_rank) {
@@ -110,9 +112,13 @@ function Doctor() {
                         <div key={doctor.id} className="doctor-card">
                             <img src={doctor.img} alt={doctor.name} className="doctor-image" />
                             <div className="doctor-info">
-                                <h3 className="doctor-name">{doctor.deg} {doctor.aca_rank} {doctor.name}</h3>
+                                <h3 className="doctor-name">{doctor.aca_rank} {doctor.deg} {doctor.name}</h3>
                                 <p className="doctor-specialty">{doctor.specialty}</p>
-                                <button className="detail-button">Xem chi tiết</button>
+                                <button className="detail-button"
+                                    onClick={() => {
+                                        navigate(`/doctor/${doctor.id}`);
+                                    }}
+                                >Xem chi tiết</button>
                             </div>
                         </div>
                     ))

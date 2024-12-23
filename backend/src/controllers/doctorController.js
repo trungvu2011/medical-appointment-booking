@@ -15,8 +15,21 @@ let handleGetDateListByDoctor = async (req, res) => {
     return res.status(200).json(data);
 }
 
+let handleGetDoctorById = async (req, res) => {
+    // Check if the query contains doctorId
+    if (!req.query.id) {
+        return res.status(500).json({
+            errCode: -1,
+            message: 'Missing required parameter'
+        });
+    }
+    let data = await doctorService.handleDoctorById(req.query);
+    return res.status(200).json(data);
+}
+
 module.exports = {
     handleGetAllDoctors: handleGetAllDoctors,
     handleGetAllSpecialties: handleGetAllSpecialties,
-    handleGetDateListByDoctor: handleGetDateListByDoctor
+    handleGetDateListByDoctor: handleGetDateListByDoctor,
+    handleGetDoctorById: handleGetDoctorById
 };

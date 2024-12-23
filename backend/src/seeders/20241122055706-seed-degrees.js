@@ -4,8 +4,12 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
         return queryInterface.bulkInsert('Degrees', [
-            { name: 'Giáo sư', abbreviation: 'GS', createdAt: new Date(), updatedAt: new Date() },
-            { name: 'Phó giáo sư', abbreviation: 'PGS', createdAt: new Date(), updatedAt: new Date() },
+            { name: 'Bác sĩ Chuyên khoa I', abbreviation: 'BSCKI', createdAt: new Date(), updatedAt: new Date() },
+            { name: 'Bác sĩ Chuyên khoa II', abbreviation: 'BSCKII', createdAt: new Date(), updatedAt: new Date() },
+            { name: 'Thạc sĩ, Bác sĩ', abbreviation: 'ThS.BS', createdAt: new Date(), updatedAt: new Date() },
+            { name: 'Tiến sĩ, Bác sĩ', abbreviation: 'TS.BS', createdAt: new Date(), updatedAt: new Date() },
+            { name: 'Bác sĩ nội trú', abbreviation: 'BSNT', createdAt: new Date(), updatedAt: new Date() },
+
         ]);
     },
 
