@@ -34,6 +34,7 @@ function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
         const requestData = {
             id: id,
             name: name,
+            phone: patient.phone,
             citizen_id: citizenId,
             address: address,
             healthInsurance: HI,
@@ -52,6 +53,7 @@ function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
                     }
                     onUpdateSuccess();
                     onClose();
+                    window.location.reload();
                 } else {
                     setError(response.data.errMessage || 'Đã xảy ra lỗi!');
                 }

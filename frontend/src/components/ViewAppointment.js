@@ -114,11 +114,11 @@ function ViewAppointment() {
                 </div>
                 <div className="appointment-info">
                     <p><b>Thời gian:</b> {appointment.start_time}</p>
-                    <p><b>Triệu chứng:</b> {appointment.symptom}</p>
-                    <p><b>Trạng thái:</b> {appointment.status === 'pending' ? 'Đang chờ' : 'Đã khám'}</p>
                     <p><b>Bác sĩ:</b> {appointment.doctor}</p>
                     <p><b>Phòng:</b> {appointment.room}</p>
                     <p><b>Địa Chỉ:</b> {appointment.base}</p>
+                    <p><b>Triệu chứng:</b> {appointment.symptom}</p>
+                    <p><b>Trạng thái:</b> {appointment.status === 'pending' ? 'Đang chờ' : 'Đã khám'}</p>
                 </div>
             </div>
         ));
