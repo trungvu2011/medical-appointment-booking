@@ -78,7 +78,7 @@ const SelectDoctor = () => {
                     <div className='doctor-card-header'>
                         <img className='doctor-avatar' src={doctor.img} alt="doctor-avatar" />
                         <div className="doctor-info">
-                            <div className="doctor-name">{doctor.deg} {doctor.aca_rank} {doctor.name}</div>
+                            <div className="doctor-name">{doctor.aca_rank} {doctor.deg} {doctor.name}</div>
                             <div className="doctor-details">
                                 {doctor.specialty}
                             </div>

@@ -40,8 +40,10 @@ function Body() {
         let cards = [];
         for (let i = 0; i < doctors.length; i++) {
             let doctor = doctors[i];
-            if (doctor.level !== 'PGS' && doctor.level !== 'GSTS' && doctor.level !== 'ThsBS') continue;
-            console.log(doctor);
+            console.log('Doctor: ', doctor);
+            doctor.level = doctor.deg;
+            if (doctor.aca_rank)
+                doctor.level = doctor.aca_rank + ' ' + doctor.level;
             cards.push(
                 <div className="doctor-card" key={i}>
                     <img className="doctor-image" src={doctor.img} alt={doctor.name} />
@@ -73,7 +75,6 @@ function Body() {
         let cards = [];
         for (let i = 0; i < specialties.length; i++) {
             let specialty = specialties[i];
-            console.log(specialty);
             cards.push(
                 <div className="doctor-card" key={i}>
                     <img className="doctor-image" src={specialty.img} alt={specialty.name} />

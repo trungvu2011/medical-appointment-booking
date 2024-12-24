@@ -7,8 +7,8 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
+    const [id, setId] = useState('');
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
     const [citizenId, setCitizenId] = useState('');
     const [address, setAddress] = useState('');
     const [birthday, setBirthday] = useState('');
@@ -17,10 +17,9 @@ function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        console.log(patient);
         if (isOpen && patient) {
+            setId(patient.id);
             setName(patient.name);
-            setPhone(patient.phone);
             setCitizenId(patient.citizen_id);
             setBirthday(patient.birthday.substring(0, 10));
             setAddress(patient.address);
@@ -33,20 +32,20 @@ function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const requestData = {
-            id: patient.id,
+            id: id,
             name: name,
-            phone: phone,
             citizen_id: citizenId,
             address: address,
             healthInsurance: HI,
             birthday: birthday
         };
 
+        // console.log('requestData:', requestData);
+
         axios
             .post('/api/edit-user-info', requestData)
             .then((response) => {
                 if (!response.data.errCode) {
-                    console.log('Cập nhật thành công:', response.data);
                     let userData = JSON.parse(localStorage.getItem('user'));
                     if (requestData.id === userData.id) {
                         localStorage.setItem('user', JSON.stringify(requestData));
@@ -85,7 +84,7 @@ function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="phone" className="mb-3">
+                    {/* <Form.Group controlId="phone" className="mb-3">
                         <Form.Label>Số điện thoại</Form.Label>
                         <Form.Control
                             type="text"
@@ -95,7 +94,7 @@ function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
                             required
                             className="form-control-lg"
                         />
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Form.Group controlId="citizenId" className="mb-3">
                         <Form.Label>Căn cước công dân</Form.Label>

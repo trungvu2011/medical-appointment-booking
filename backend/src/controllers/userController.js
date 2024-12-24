@@ -26,6 +26,14 @@ let handleRegister = async (req, res) => {
 }
 
 let handleEditUser = async (req, res) => {
+    if (!req.body.id || !req.body.name
+        || !req.body.address || !req.body.birthday || !req.body.healthInsurance) {
+        return res.status(500).json({
+            errCode: 1,
+            message: 'Missing required parameter',
+        });
+    }
+    console.log('Input:', req.body);
     let data = await userServices.handleUserEdit(req.body);
     return res.status(200).json(data);
 }

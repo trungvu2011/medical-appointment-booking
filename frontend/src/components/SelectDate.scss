@@ -101,10 +101,11 @@
                 gap: 20px;
                 align-items: center;
                 padding: 10px;
+                flex-direction: row;
+                justify-content: flex-start;
 
                 .doctor-avatar {
                     display: flex;
-                    justify-content: center;
                     align-items: center;
                     width: 20px;
                     height: 20px;
