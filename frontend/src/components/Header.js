@@ -6,8 +6,10 @@ import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faHospital } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+    const navigate = useNavigate();
     let [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     let [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
@@ -41,6 +43,7 @@ function Header() {
         localStorage.removeItem('user');
         setLogin(false);
         setUserName('');
+        navigate('/');
     }
 
     return (
@@ -57,7 +60,15 @@ function Header() {
                     <li><a href="/news">Tin tức</a></li>
                     <li><a href="/specialties">Chuyên khoa</a></li>
                     <li><a href="/doctors">Bác sĩ</a></li>
-                    <li><a href="/booking">Đặt lịch</a></li>
+                    <li><a
+                        onClick={() => {
+                            if (!isLogin) {
+                                openLoginModal();
+                            } else {
+                                navigate('/booking');
+                            }
+                        }}
+                    >Đặt lịch</a></li>
                 </ul>
             </nav>
             <div className="header-right">
