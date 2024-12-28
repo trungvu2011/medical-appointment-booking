@@ -36,11 +36,54 @@ function Body() {
             });
     }, []);
 
+    const [newsList, setNewsList] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/get-all-news')
+            .then(res => {
+                setNewsList(res.data.slice(0, 3));
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+
+    }, []);
+
+    let renderNews = newsList.map((news, index) => {
+        return (
+            <div className='item-news'>
+                <div className='title-item-news'>
+                    <h4>Tin tức - Sự kiện</h4>
+                </div>
+                <div className='news-box'>
+                    <img src={news.imgUrl}></img>
+                    <h3>{news.title}</h3>
+                    <p className='date'>
+                        {new Date(news.date).toLocaleString('en-GB', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            hour12: false
+                        }).replace(',', '')}
+                    </p>
+                    <p>{news.content}</p>
+                    <button className='detail'
+                        onClick={() => navigate(`/news/${news.id}`)}
+                    >Chi tiết</button>
+                </div>
+            </div>
+        );
+    });
+
+
     let renderDoctorCards = () => {
         let cards = [];
         for (let i = 0; i < doctors.length; i++) {
             let doctor = doctors[i];
-            console.log('Doctor: ', doctor);
             doctor.level = doctor.deg;
             if (doctor.aca_rank)
                 doctor.level = doctor.aca_rank + ' ' + doctor.level;
@@ -164,42 +207,7 @@ function Body() {
                     <p>Những tin tức được cập nhật hàng ngày tại E-HOSPITAL</p>
                 </div>
                 <div className='news-home-content'>
-                    <div className='item-news'>
-                        <div className='title-item-news'>
-                            <h4>Tin tức - Sự kiện</h4>
-                        </div>
-                        <div className='news-box'>
-                            <img src={require('../assets/news1.jpg')}></img>
-                            <h3>Hội thảo Ghép mô – tạng và Trao quyết định bổ nhiệm Phó Chủ tịch Hội ghép</h3>
-                            <p className='date'>06/12/2024</p>
-                            <p>Bệnh viện Hữu nghị Việt Đức không chỉ là cơ sở y tế hàng đầu mà còn là biểu tượng tiên phong trong lĩnh vực ghép tạng tại Việt Nam. Với những bước tiến vượt bậc về kỹ thuật, đội…</p>
-                            <button className='detail'>Chi tiết</button>
-                        </div>
-                    </div>
-                    <div className='item-news'>
-                        <div className='title-item-news'>
-                            <h4>Tin tức - Sự kiện</h4>
-                        </div>
-                        <div className='news-box'>
-                            <img src={require('../assets/news2.jpg')}></img>
-                            <h3>Thư mời tham dự Hội thảo Công tác Ghép mô – tạng Bệnh viện Hữu nghị Việt</h3>
-                            <p className='date'>27/11/2024</p>
-                            <p>Trong suốt hơn 20 năm qua, kể từ ca ghép thận đầu tiên được thực hiện thành công vào năm 2002, Bệnh viện Hữu nghị Việt Đức đã không ngừng phát triển và khẳng định vai trò tiên phong…</p>
-                            <button className='detail'>Chi tiết</button>
-                        </div>
-                    </div>
-                    <div className='item-news'>
-                        <div className='title-item-news'>
-                            <h4>Tin tức - Sự kiện</h4>
-                        </div>
-                        <div className='news-box'>
-                            <img src={require('../assets/news3.jpg')}></img>
-                            <h3>Hơn 1.1 tỷ đồng hỗ trợ người bệnh có hoàn cảnh khó khăn trong tháng 11 năm</h3>
-                            <p className='date'>06/12/2024</p>
-                            <p>Trong tháng 11/2024, các nhà hảo tâm đã tiếp tục đồng hành cùng Bệnh viện Hữu nghị Việt Đức trong việc hỗ trợ người bệnh có hoàn cảnh khó khăn, với tổng số tiền quyên góp được là 1.101.574.142 VNĐ…</p>
-                            <button className='detail'>Chi tiết</button>
-                        </div>
-                    </div>
+                    {renderNews}
                 </div>
             </div>
 

@@ -12,6 +12,8 @@ import ConfirmAppointmentPage from './pages/ConfirmAppointmentPage.js';
 import ViewPage from './pages/ViewAppointment.js';
 import DoctorDetailPage from './pages/DoctorDetailPage.js';
 import SpecialtyDetailPage from './pages/SpecialtyDetailPage.js';
+import NewsPage from './pages/NewsPage.js';
+import NewsDetailPage from './pages/NewsDetailPage.js';
 import axios from 'axios';
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
         <Route path="/view-appointment" element={<ViewPage />} />
         <Route path="/doctor/:id" element={<DoctorDetailPage />} />
         <Route path="/specialty/:id" element={<SpecialtyDetailPage />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/:id" element={<NewsDetailPage />} />
       </Routes>
     </Router>
   );
