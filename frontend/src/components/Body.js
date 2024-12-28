@@ -88,7 +88,11 @@ function Body() {
             if (doctor.aca_rank)
                 doctor.level = doctor.aca_rank + ' ' + doctor.level;
             cards.push(
-                <div className="doctor-card" key={i}>
+                <div className="doctor-card" key={i}
+                    onClick={() => {
+                        navigate(`/doctor/${doctor.id}`);
+                    }}
+                >
                     <img className="doctor-image" src={doctor.img} alt={doctor.name} />
                     <div className="doctor-name">{doctor.level} {doctor.name}</div>
                     <div className="doctor-specialty">{doctor.specialty}</div>
@@ -119,7 +123,9 @@ function Body() {
         for (let i = 0; i < specialties.length; i++) {
             let specialty = specialties[i];
             cards.push(
-                <div className="doctor-card" key={i}>
+                <div className="doctor-card" key={i}
+                    onClick={() => navigate(`/specialty/${specialty.id}`, { state: { specialty } })}
+                >
                     <img className="doctor-image" src={specialty.img} alt={specialty.name} />
                     <div className="doctor-name">{specialty.name}</div>
                     <div className="doctor-specialty">{specialty.description}</div>
