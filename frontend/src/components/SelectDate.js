@@ -183,10 +183,10 @@ function SelectDate() {
                             <FontAwesomeIcon icon={faChevronLeft} />
                         </button>
                         {weeks[currentWeek]?.map((date) => {
-                            let currentYear = new Date().getFullYear();
-                            let dateParts = date.date.split('/');
-                            let selectedDateObj = new Date(`${currentYear}/${dateParts[1]}/${dateParts[0]}`);
+                            let [day, month, year] = date.date.split('/').map(Number);
+                            let selectedDateObj = new Date(year, month - 1, day); // Tạo ngày với năm chính xác
                             selectedDateObj.setHours(0, 0, 0, 0);
+
                             let currentDate = new Date();
                             currentDate.setHours(0, 0, 0, 0);
 

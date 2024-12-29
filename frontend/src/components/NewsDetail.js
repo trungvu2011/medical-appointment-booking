@@ -58,7 +58,7 @@ function NewsDetail() {
                 <img src={news.imgUrl} alt={news.title} />
                 <p>{formatContent(news.content, 1)}</p>
             </div>
-            <button onClick={() => navigate('/news')}>Back to News Page</button>
+            <button onClick={() => navigate('/news')}>Quay lại</button>
         </div>
     );
 }

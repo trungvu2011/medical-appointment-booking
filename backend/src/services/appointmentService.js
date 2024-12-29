@@ -72,13 +72,14 @@ let updateAppointmentStatus = async () => {
         const now = new Date();  // Lấy thời gian hiện tại
 
         // Tìm tất cả các cuộc hẹn có trạng thái 'pending' và thời gian khám đã qua
-        const appointments = await db.Appointment.findAll({
+        let appointments = await db.Appointment.findAll({
             where: {
                 status: 'pending',
                 date: {
-                    [Op.lte]: now,  // So sánh ngày khám với thời gian hiện tại (ngày khám đã qua hoặc bằng thời gian hiện tại)
+                    [Op.lte]: now,
                 },
             },
+            attributes: ['id', 'status'], // Đặt đúng vị trí
         });
 
         // Cập nhật trạng thái thành 'completed' cho những cuộc hẹn đã đến giờ khám
