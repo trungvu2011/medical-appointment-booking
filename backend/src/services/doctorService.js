@@ -49,6 +49,58 @@ let handleAllDoctors = async () => {
     });
 }
 
+let handleGetDoctors = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let specialtyID = data.id;
+            let doctors = await db.Doctor.findAll({
+                where: { specialty_id: specialtyID }
+            });
+            if (doctors && doctors.length > 0) {
+                for (let i = 0; i < doctors.length; i++) {
+                    let specialty = await db.Specialty.findOne({
+                        where: { id: doctors[i].specialty_id }
+                    });
+                    let degree = await db.Degree.findOne({
+                        where: { id: doctors[i].degree_id }
+                    });
+                    let academicRank = await db.AcademicRank.findOne({
+                        where: { id: doctors[i].academic_rank_id }
+                    });
+                    doctors[i].setDataValue('specialty', specialty.name);
+                    if (!degree) {
+                        doctors[i].setDataValue('degree', null);
+                        doctors[i].setDataValue('deg', null);
+                    } else {
+                        doctors[i].setDataValue('degree', degree.name);
+                        doctors[i].setDataValue('deg', degree.abbreviation);
+                    }
+                    if (!academicRank) {
+                        doctors[i].setDataValue('academic_rank', null);
+                        doctors[i].setDataValue('aca_rank', null);
+                    } else {
+                        doctors[i].setDataValue('academic_rank', academicRank.name);
+                        doctors[i].setDataValue('aca_rank', academicRank.abbreviation);
+
+                    }
+
+                }
+                resolve({
+                    errCode: 0,
+                    data: doctors
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'No doctors found'
+                });
+            }
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 let handleAllSpecialties = async () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -169,6 +221,7 @@ let handleDoctorById = async (data) => {
 
 module.exports = {
     handleAllDoctors: handleAllDoctors,
+    handleGetDoctors: handleGetDoctors,
     handleAllSpecialties: handleAllSpecialties,
     handleDateListByDoctor: handleDateListByDoctor,
     handleDoctorById: handleDoctorById
