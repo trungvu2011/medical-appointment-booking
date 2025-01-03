@@ -71,3 +71,18 @@ h1 {
     color: #ff6f61;
     font-weight: 700;
 }
+
+.booking-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #075BB5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #0d6efd;
+    }
+}

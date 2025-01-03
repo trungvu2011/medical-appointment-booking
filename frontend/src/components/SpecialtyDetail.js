@@ -50,7 +50,7 @@ function SpecialtyDetail() {
                 <h2>Danh sách bác sĩ</h2>
                 {doctors.length > 0 ? (
                     doctors.map((doctor) => (
-                        <div key={doctor.id} className="doctor-card">
+                        <div key={doctor.id} className="doctor-card" onClick={() => { navigate(`/doctor/${doctor.id}`); }}>
                             <img src={doctor.img} alt={doctor.name} className="doctor-image" />
                             <div className="doctor-info">
                                 <h3 className="doctor-name">{doctor.aca_rank} {doctor.deg} {doctor.name}</h3>

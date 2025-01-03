@@ -109,7 +109,7 @@ function Doctor() {
             <div className="doctor-list">
                 {filteredDoctors.length > 0 ? (
                     filteredDoctors.map((doctor) => (
-                        <div key={doctor.id} className="doctor-card">
+                        <div key={doctor.id} className="doctor-card" onClick={() => { navigate(`/doctor/${doctor.id}`); }}>
                             <img src={doctor.img} alt={doctor.name} className="doctor-image" />
                             <div className="doctor-info">
                                 <h3 className="doctor-name">{doctor.aca_rank} {doctor.deg} {doctor.name}</h3>
