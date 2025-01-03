@@ -70,7 +70,7 @@ function ModalSelectPatient({ isOpen, onClose, userData, doctorif }) {
     };
 
     return (
-        <Modal show={isOpen} onHide={onClose}>
+        <Modal show={isOpen} onHide={onClose} size="lg" centered>
             <div className="registration-page">
                 <div className="background-banner">
                     <h1 className="title">Đăng ký khám</h1>

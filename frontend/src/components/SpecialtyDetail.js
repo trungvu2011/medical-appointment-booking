@@ -47,7 +47,6 @@ function SpecialtyDetail() {
             </div>
 
             <div className="doctor-list">
-                <h2>Danh sách bác sĩ</h2>
                 {doctors.length > 0 ? (
                     doctors.map((doctor) => (
                         <div key={doctor.id} className="doctor-card" onClick={() => { navigate(`/doctor/${doctor.id}`); }}>

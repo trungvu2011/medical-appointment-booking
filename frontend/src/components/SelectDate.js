@@ -6,7 +6,6 @@ import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-// Hàm tạo dữ liệu từ thứ 2 đến chủ nhật
 async function generateWeeksData(doctor_id, weeksToGenerate = 4) {
     let weeks = [];
     try {
@@ -14,10 +13,8 @@ async function generateWeeksData(doctor_id, weeksToGenerate = 4) {
         const dateList = response.data.dateList;
         const bookedDateList = response.data.bookedDateList;
 
-        // Mảng các ngày trong tuần
         let weekdays = ['CN', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
 
-        // Hàm tạo dữ liệu cho từng tuần
         const createWeekData = (weekStartDate) => {
             let weekData = [];
             for (let day = 0; day < 7; day++) {
@@ -30,12 +27,10 @@ async function generateWeeksData(doctor_id, weeksToGenerate = 4) {
                     .filter(item => item.work_day === dayLabel)
                     .map(item => item.start_time);
 
-                // Lọc ra những giờ đã đặt
                 for (let i = 0; i < bookedDateList.length; i++) {
                     let bookedDate = new Date(bookedDateList[i].date);
                     if (bookedDate.getDate() === currentDate.getDate()) {
                         let bookedTime = bookedDateList[i].start_time;
-                        // Loại bỏ những giờ đã đặt
                         availableSlots = availableSlots.filter(slot => slot !== bookedTime);
                     }
                 }
@@ -72,20 +67,21 @@ function SelectDate() {
     let patient = location.state?.patient;
     let doctor = location.state?.doctor;
     let [adjustedPrice, setAdjustedPrice] = useState(doctor?.price_service);
+    let [displayPrice, setDisplayPrice] = useState('');
 
-    let [weeks, setWeeks] = useState([]); // Danh sách các tuần
-    let [currentWeek, setCurrentWeek] = useState(0); // Tuần hiện tại
+    let [weeks, setWeeks] = useState([]);
+    let [currentWeek, setCurrentWeek] = useState(0);
     let [selectedDate, setSelectedDate] = useState(null);
     let [selectedTime, setSelectedTime] = useState(null);
-    let [isDateVisible, setIsDateVisible] = useState(false); // Quản lý việc hiển thị lịch
+    let [isDateVisible, setIsDateVisible] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
-            let weeksData = await generateWeeksData(doctor.id, 4); // Gọi hàm bất đồng bộ
+            let weeksData = await generateWeeksData(doctor.id, 4);
             setWeeks(weeksData);
         };
         fetchData();
-    }, [doctor.id]); // Chỉ gọi lại khi doctor.id thay đổi
+    }, [doctor.id]);
 
     let handleContinue = () => {
         if (selectedDate && selectedTime) {
@@ -94,10 +90,10 @@ function SelectDate() {
                     patient,
                     doctor,
                     appointment: {
-                        price: adjustedPrice,   // Giá khám
-                        date: selectedDate.date, // Ngày (dd/mm/yyyy)
-                        day: selectedDate.day,   // Thứ
-                        time: selectedTime,      // Giờ
+                        price: adjustedPrice,
+                        date: selectedDate.date,
+                        day: selectedDate.day,
+                        time: selectedTime,
                     },
                 },
             });
@@ -115,7 +111,7 @@ function SelectDate() {
     };
 
     let toggleDateVisibility = () => {
-        setIsDateVisible((prev) => !prev); // Chuyển đổi trạng thái hiển thị lịch
+        setIsDateVisible((prev) => !prev);
     };
 
     let formatCurrency = (value) => {
@@ -125,11 +121,13 @@ function SelectDate() {
     let handleDateSelect = (date) => {
         setSelectedDate({ date: date.date, day: date.day });
 
-        // Kiểm tra nếu ngày là thứ 7 hoặc CN
         if (date.day === 'Thứ 7' || date.day === 'CN') {
-            setAdjustedPrice(Math.round(doctor?.price_service * 1.5)); // Cộng thêm 50%
+            let newPrice = Math.round(doctor?.price_service * 1.5);
+            setAdjustedPrice(newPrice);
+            setDisplayPrice(`${formatCurrency(newPrice)} (phụ phí ngoài giờ)`);
         } else {
-            setAdjustedPrice(doctor?.price_service); // Giữ nguyên giá
+            setAdjustedPrice(doctor?.price_service);
+            setDisplayPrice(formatCurrency(doctor?.price_service));
         }
     };
 
@@ -162,17 +160,15 @@ function SelectDate() {
                 </div>
                 <h5 className="select-date-text">Chọn ngày khám</h5>
 
-                {/* Thẻ chuyên khoa và giá khám */}
                 <div className="doctor-specialty" onClick={toggleDateVisibility}>
                     <FontAwesomeIcon className="specialty-icon" icon={faNotesMedical} />
                     <div className='specialty'>
                         <div className="specialty-name">{doctor?.specialty}</div>
-                        <div className="specialty-price">{formatCurrency(adjustedPrice)}</div>
+                        <div className="specialty-price">{displayPrice || formatCurrency(adjustedPrice)}</div>
                     </div>
                     <FontAwesomeIcon className="specialty-select" icon={faChevronRight} />
                 </div>
 
-                {/* Hiển thị lịch chỉ khi click vào thẻ chuyên khoa */}
                 {isDateVisible && (
                     <div className="date-list">
                         <button
@@ -184,13 +180,13 @@ function SelectDate() {
                         </button>
                         {weeks[currentWeek]?.map((date) => {
                             let [day, month, year] = date.date.split('/').map(Number);
-                            let selectedDateObj = new Date(year, month - 1, day); // Tạo ngày với năm chính xác
+                            let selectedDateObj = new Date(year, month - 1, day);
                             selectedDateObj.setHours(0, 0, 0, 0);
 
                             let currentDate = new Date();
                             currentDate.setHours(0, 0, 0, 0);
 
-                            let isPastDate = selectedDateObj < currentDate;
+                            let isPastDate = selectedDateObj <= currentDate;
                             let isAvailable = date.slots.length > 0;
                             let isNotAvailable = isPastDate || !isAvailable;
 
