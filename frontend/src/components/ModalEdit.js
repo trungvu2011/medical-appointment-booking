@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
     const [id, setId] = useState('');
     const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
     const [citizenId, setCitizenId] = useState('');
     const [address, setAddress] = useState('');
     const [birthday, setBirthday] = useState('');
@@ -20,28 +21,30 @@ function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
         if (isOpen && patient) {
             setId(patient.id);
             setName(patient.name);
+            setGender(patient.gender);
             setCitizenId(patient.citizen_id);
             setBirthday(patient.birthday.substring(0, 10));
             setAddress(patient.address);
             setHI(patient.healthInsurance);
             setError('');
             setLoading(false);
+            console.log("test1", patient.gender);
         }
     }, [isOpen]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         const requestData = {
             id: id,
             name: name,
+            gender: gender,
             phone: patient.phone,
             citizen_id: citizenId,
             address: address,
             healthInsurance: HI,
             birthday: birthday
         };
-
-        // console.log('requestData:', requestData);
 
         axios
             .post('/api/edit-user-info', requestData)
@@ -86,17 +89,29 @@ function ModalEdit({ isOpen, onClose, patient, onUpdateSuccess }) {
                         />
                     </Form.Group>
 
-                    {/* <Form.Group controlId="phone" className="mb-3">
-                        <Form.Label>Số điện thoại</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Nhập số điện thoại của bạn"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            required
-                            className="form-control-lg"
-                        />
-                    </Form.Group> */}
+                    <Form.Group controlId="gender" className="mb-3">
+                        <Form.Label>Giới tính</Form.Label>
+                        <div>
+                            <Form.Check
+                                type="radio"
+                                id="male"
+                                label="Nam"
+                                value="Male"
+                                checked={gender === 'Male'}
+                                onChange={(e) => setGender(e.target.value)}
+                                inline
+                            />
+                            <Form.Check
+                                type="radio"
+                                id="female"
+                                label="Nữ"
+                                value="Female"
+                                checked={gender === 'Female'}
+                                onChange={(e) => setGender(e.target.value)}
+                                inline
+                            />
+                        </div>
+                    </Form.Group>
 
                     <Form.Group controlId="citizenId" className="mb-3">
                         <Form.Label>Căn cước công dân</Form.Label>

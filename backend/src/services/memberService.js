@@ -42,6 +42,7 @@ let handleAddNewMember = (data) => {
                 let newMember = await db.User.create({
                     phone: data.phone,
                     name: data.name,
+                    gender: data.gender,
                     password: '',
                     citizen_id: data.citizen_id,
                     address: data.address,
@@ -75,7 +76,7 @@ let handleAllMembers = (data) => {
                 let memberInfo = await db.User.findOne({
                     where: { id: memberList[i].member_id },
                     attributes: {
-                        include: ['id', 'name', 'phone', 'citizen_id', 'address', 'birthday', 'healthInsurance'],
+                        include: ['id', 'name', 'gender', 'phone', 'citizen_id', 'address', 'birthday', 'healthInsurance'],
                         exclude: ['password', 'createdAt', 'updatedAt']
                     },
 

@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 function ModalAddMember({ isOpen, onClose }) {
     const [citizen_id, setCitizenId] = useState('');
     const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
     const [phone, setPhone] = useState('');
     const [birthday, setBirthday] = useState('');
     const [healthInsurance, setHealthInsurance] = useState('');
@@ -20,6 +21,7 @@ function ModalAddMember({ isOpen, onClose }) {
     useEffect(() => {
         if (!isOpen) {
             setName('');
+            setGender('');
             setPhone('');
             setCitizenId('');
             setBirthday('');
@@ -32,6 +34,11 @@ function ModalAddMember({ isOpen, onClose }) {
 
     let handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!gender) {
+            setError('Vui lòng chọn giới tính');
+            return;
+        }
 
         setLoading(true);
         setError('');
@@ -46,6 +53,7 @@ function ModalAddMember({ isOpen, onClose }) {
         let requestData = {
             user_id: user.id,
             name: name,
+            gender: gender,
             phone: phone,
             citizen_id: citizen_id,
             birthday: birthday,
@@ -97,6 +105,30 @@ function ModalAddMember({ isOpen, onClose }) {
                             required
                             className="form-control-lg"
                         />
+                    </Form.Group>
+
+                    <Form.Group controlId="gender" className="mb-3">
+                        <Form.Label>Giới tính</Form.Label>
+                        <div>
+                            <Form.Check
+                                type="radio"
+                                id="male"
+                                label="Nam"
+                                value="Male"
+                                checked={gender === 'Male'}
+                                onChange={(e) => setGender(e.target.value)}
+                                inline
+                            />
+                            <Form.Check
+                                type="radio"
+                                id="female"
+                                label="Nữ"
+                                value="Female"
+                                checked={gender === 'Female'}
+                                onChange={(e) => setGender(e.target.value)}
+                                inline
+                            />
+                        </div>
                     </Form.Group>
 
                     <Form.Group controlId="phone" className="mb-3">

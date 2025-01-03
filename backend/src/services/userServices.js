@@ -1,6 +1,6 @@
 import { raw } from 'body-parser';
 import db from '../models/index';
-import bcrypt from 'bcryptjs';
+import bcrypt, { genSalt } from 'bcryptjs';
 let salt = bcrypt.genSaltSync(10);
 
 
@@ -13,7 +13,7 @@ let handleUserLogin = (phone, password) => {
             if (isExist) {
                 let user = await db.User.findOne({
                     where: { phone: phone },
-                    attributes: ['id', 'phone', 'password', 'name', 'citizen_id', 'birthday', 'address', 'healthInsurance'],
+                    attributes: ['id', 'phone', 'password', 'name', 'gender', 'citizen_id', 'birthday', 'address', 'healthInsurance'],
                 });
                 if (user) {
                     let check = await bcrypt.compareSync(password, user.password);
@@ -77,7 +77,7 @@ let checkUserCitizenId = async (citizenId) => {
 let handleUserRegister = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.phone || !data.password || !data.name || !data.citizen_id
+            if (!data.phone || !data.password || !data.name || !data.gender || !data.citizen_id
                 || !data.birthday || !data.healthInsurance || !data.address) {
                 resolve({
                     errCode: 1,
@@ -98,6 +98,7 @@ let handleUserRegister = (data) => {
 
                 if (!existUser.password) {
                     existUser.name = data.name;
+                    existUser.gender = data.gender;
                     existUser.citizen_id = data.citizen_id;
                     existUser.password = bcrypt.hashSync(data.password, salt);
                     existUser.phone = data.phone;
@@ -115,6 +116,7 @@ let handleUserRegister = (data) => {
                     phone: data.phone,
                     password: hashPassword,
                     name: data.name,
+                    gender: data.gender,
                     citizen_id: data.citizen_id,
                     address: data.address,
                     birthday: data.birthday, // Lưu ngày sinh đã chuyển định dạng
@@ -139,6 +141,7 @@ let handleUserEdit = (data) => {
 
             let updatedUser = await user.update({
                 name: data.name,
+                gender: data.gender,
                 citizen_id: data.citizen_id,
                 address: data.address,
                 healthInsurance: data.healthInsurance,
@@ -148,7 +151,7 @@ let handleUserEdit = (data) => {
             resolve({
                 errCode: 0,
                 errMessage: 'Updated',
-                updatedUser
+                updatedUser,
             });
         } catch (error) {
             console.error('Error in edition:', error);

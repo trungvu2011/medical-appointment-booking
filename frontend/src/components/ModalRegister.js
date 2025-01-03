@@ -12,6 +12,7 @@ function ModalRegister({ isOpen, onClose }) {
     const [address, setAddress] = useState('');
     const [birthday, setBirthday] = useState('');
     const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -21,6 +22,7 @@ function ModalRegister({ isOpen, onClose }) {
     useEffect(() => {
         if (!isOpen) {
             setName('');
+            setGender('');
             setPhone('');
             setPassword('');
             setCitizenId('');
@@ -35,11 +37,17 @@ function ModalRegister({ isOpen, onClose }) {
     let handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!gender) {
+            setError('Vui lòng chọn giới tính');
+            return;
+        }
+
         setLoading(true);
         setError(''); // Reset any previous error
 
         let requestData = {
             name: name,
+            gender: gender,
             phone: phone,
             password: password,
             citizen_id: citizen_id,
@@ -86,6 +94,30 @@ function ModalRegister({ isOpen, onClose }) {
                             required
                             className="form-control-lg"
                         />
+                    </Form.Group>
+
+                    <Form.Group controlId="gender" className="mb-3">
+                        <Form.Label>Giới tính</Form.Label>
+                        <div>
+                            <Form.Check
+                                type="radio"
+                                id="male"
+                                label="Nam"
+                                value="Male"
+                                checked={gender === 'Male'}
+                                onChange={(e) => setGender(e.target.value)}
+                                inline
+                            />
+                            <Form.Check
+                                type="radio"
+                                id="female"
+                                label="Nữ"
+                                value="Female"
+                                checked={gender === 'Female'}
+                                onChange={(e) => setGender(e.target.value)}
+                                inline
+                            />
+                        </div>
                     </Form.Group>
 
                     <Form.Group controlId="phone" className="mb-3">

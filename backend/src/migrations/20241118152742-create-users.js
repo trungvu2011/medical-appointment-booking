@@ -10,6 +10,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      gender: {
+        type: Sequelize.ENUM('Male', 'Female'),
+      },
       phone: {
         type: Sequelize.STRING,
         unique: true,
