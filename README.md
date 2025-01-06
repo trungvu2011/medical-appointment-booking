@@ -1,7 +1,7 @@
 # Medical Appointment Booking Website
 
 ## Tổng quan
-Dự án này là một hệ thống đặt lịch hẹn y tế được thiết kế để đơn giản hóa quy trình lên lịch và quản lý các cuộc hẹn y tế.
+Dự án này là một hệ thống đặt lịch hẹn y tế được thiết kế để đơn giản hóa quy trình lên lịch và quản lý các cuộc hẹn y tế. Mục tiêu chính là tiết kiệm thời gian cho cả bệnh nhân và nhân viên y tế, giảm thiểu sai sót và nâng cao trải nghiệm người dùng.
 
 ## Tính năng
 - Đăng ký và xác thực người dùng
@@ -9,13 +9,12 @@ Dự án này là một hệ thống đặt lịch hẹn y tế được thiết
 - Hồ sơ bác sĩ và bệnh nhân
 
 ## Người đóng góp
-- **Vũ Đức Trung** - Chức năng đặt lịch khám bệnh cho bản thân và người nhànhà
+- **Vũ Đức Trung** - Chức năng đặt lịch khám bệnh cho bản thân và người nhà
 - **Nguyễn Hoàng Chiến** - Chức năng sửa thông tin người dùng và xem lịch khám bệnh
 
 ## Thiết kế
-Hệ thống được thiết kế sử dụng kiến trúc microservices với các thành phần sau:
-- **Frontend**: React.js
-- **Backend**: Node.js với Express
+- **Frontend**: React.js và Bootstrap để tạo giao diện người dùng thân thiện
+- **Backend**: Node.js với Express 
 - **Cơ sở dữ liệu**: MySQL
 
 ## Các điểm cuối API
@@ -43,6 +42,11 @@ Hệ thống được thiết kế sử dụng kiến trúc microservices với 
 - `GET /api/get-all-news` - Lấy tất cả các tin tức
 - `GET /api/get-news-by-id` - Lấy tin tức theo ID
 
+## Yêu cầu hệ thống
+- **Node.js** phiên bản 20.x trở lên
+- **MySQL** phiên bản 8 trở lên
+- **npm** phiên bản 6.x trở lên
+
 ## Cài đặt
 1. Clone repository
     ```bash
@@ -62,11 +66,11 @@ Hệ thống được thiết kế sử dụng kiến trúc microservices với 
     ```
 
 4. Cấu hình môi trường cho backend
-    - Tạo file `.env` trong thư mục [backend] dựa trên file `.env.example`
+    - Tạo file `.env` trong thư mục `backend` dựa trên file `.env.example`.
     - Cập nhật các biến môi trường trong file `.env` theo cấu hình của bạn
 
 5. Cấu hình môi trường cho frontend
-    - Tạo file `.env` trong thư mục [frontend] dựa trên file `.env.example`
+    - Tạo file `.env` trong thư mục `frontend` dựa trên file `.env.example`.
     - Cập nhật các biến môi trường trong file `.env` theo cấu hình của bạn
 
 6. Khởi động server phát triển cho backend
